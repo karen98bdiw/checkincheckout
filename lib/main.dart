@@ -21,9 +21,22 @@ class MyApp extends StatelessWidget {
         visualDensity: VisualDensity.adaptivePlatformDensity,
         buttonColor: mainOrange,
         appBarTheme: AppBarTheme(
-          iconTheme: IconThemeData(color: appBarIconColor, size: 40),
-        ),
+            iconTheme: IconThemeData(color: appBarIconColor, size: 40),
+            textTheme: TextTheme(
+              headline1: TextStyle(
+                fontSize: midiumTextSize,
+                fontWeight: midiumTextWeight,
+                color: appBarTitleColor,
+              ),
+            )),
         inputDecorationTheme: InputDecorationTheme(
+          contentPadding: EdgeInsets.all(0),
+          border: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(25),
+            borderSide: BorderSide(
+              color: Colors.grey[900],
+            ),
+          ),
           hintStyle: TextStyle(
             color: hintTextColor,
             fontSize: hintTextSize,
