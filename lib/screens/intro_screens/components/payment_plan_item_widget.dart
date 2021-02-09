@@ -2,7 +2,14 @@ import 'package:flutter/material.dart';
 
 import '../../../utils/const.dart';
 
+import '../signIn_screens/signIn_screen.dart';
+
 class PaymentPlanItemWidget extends StatelessWidget {
+  //stay statSess if favorite state will getted from statemanagment
+  //convert to statefull if favorite status will getted from widget,
+
+  BuildContext _buildContext;
+
   final String itemTitle;
   final double monthPrice;
   final double yearPrice;
@@ -17,10 +24,13 @@ class PaymentPlanItemWidget extends StatelessWidget {
     @required this.yearPrice,
   });
 
-  void _onItemSelect() {}
+  void _onItemSelect() {
+    Navigator.of(_buildContext).pushNamed(SignInScreen.routeName);
+  }
 
   @override
   Widget build(BuildContext context) {
+    _buildContext = context;
     return Container(
       child: Column(
         mainAxisSize: MainAxisSize.min,

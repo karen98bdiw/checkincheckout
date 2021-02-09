@@ -4,6 +4,8 @@ import '../../utils/const.dart';
 
 import './intro_screen.dart';
 
+import '../widgets/logo_widget.dart';
+
 class Intro extends StatelessWidget {
   static final routeName = "Intro";
 
@@ -24,7 +26,7 @@ class Intro extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.stretch,
             mainAxisSize: MainAxisSize.min,
             children: [
-              _logo(context: context),
+              LogoWidget(),
               SizedBox(
                 height: 20,
               ),
@@ -33,19 +35,6 @@ class Intro extends StatelessWidget {
                 style: Theme.of(context).textTheme.headline2,
               ),
             ],
-          ),
-        ),
-      ),
-    );
-  }
-
-  Widget _logo({BuildContext context}) {
-    return Container(
-      height: MediaQuery.of(context).size.height * 0.12,
-      decoration: BoxDecoration(
-        image: DecorationImage(
-          image: AssetImage(
-            "assets/images/mainLogo.png",
           ),
         ),
       ),

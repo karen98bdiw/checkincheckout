@@ -3,8 +3,10 @@ import 'package:flutter/material.dart';
 import '../../utils/const.dart';
 
 import '../widgets/mainButton.dart';
+import '../widgets/logo_widget.dart';
 
 import './singUp_screens/signUp_screen.dart';
+import './signIn_screens/signIn_screen.dart';
 
 class IntroScreen extends StatelessWidget {
   static final routeName = "IntroScreen";
@@ -25,7 +27,7 @@ class IntroScreen extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             mainAxisSize: MainAxisSize.min,
             children: [
-              _logo(context: context),
+              LogoWidget(),
               SizedBox(
                 height: 20,
               ),
@@ -38,7 +40,9 @@ class IntroScreen extends StatelessWidget {
               ),
               MainButton(
                 text: "Sign In",
-                callBack: () {},
+                callBack: () {
+                  Navigator.of(context).pushNamed(SignInScreen.routeName);
+                },
               ),
               SizedBox(
                 height: 20,
@@ -50,19 +54,6 @@ class IntroScreen extends StatelessWidget {
                 },
               ),
             ],
-          ),
-        ),
-      ),
-    );
-  }
-
-  Widget _logo({BuildContext context}) {
-    return Container(
-      height: MediaQuery.of(context).size.height * 0.12,
-      decoration: BoxDecoration(
-        image: DecorationImage(
-          image: AssetImage(
-            "assets/images/mainLogo.png",
           ),
         ),
       ),
