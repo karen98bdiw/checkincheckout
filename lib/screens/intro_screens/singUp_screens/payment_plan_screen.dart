@@ -15,18 +15,37 @@ class PaymentPlanScreen extends StatelessWidget {
       body: SingleChildScrollView(
         child: Padding(
           padding: EdgeInsets.symmetric(
-            horizontal: 10,
-            vertical: MediaQuery.of(context).size.width * defaultPaddingProcent,
+            vertical: 15,
+            horizontal:
+                MediaQuery.of(context).size.width * defaultPaddingProcent,
           ),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
               PaymentPlanItemWidget(
                   itemTitle: "Best Price",
-                  mothPrice: "29.99",
-                  saveProcent: "100",
-                  trialDuration: "7",
-                  yearPrice: "379.88"),
+                  monthPrice: 29.99,
+                  saveMoney: 100,
+                  trialDuration: 7,
+                  yearPrice: 379.88),
+              SizedBox(
+                height: 20,
+              ),
+              PaymentPlanItemWidget(
+                  itemTitle: "Best Price",
+                  monthPrice: 29.99,
+                  saveMoney: 100,
+                  trialDuration: 7,
+                  yearPrice: 379.88),
+              SizedBox(
+                height: 20,
+              ),
+              PaymentPlanItemWidget(
+                  itemTitle: "Best Price",
+                  monthPrice: 29.99,
+                  saveMoney: 100,
+                  trialDuration: 7,
+                  yearPrice: 379.88),
             ],
           ),
         ),

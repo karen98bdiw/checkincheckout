@@ -49,6 +49,7 @@ class PaymentInfoScreen extends StatelessWidget {
                       height: 10,
                     ),
                     TextFormField(
+                      initialValue: "555",
                       textAlign: TextAlign.center,
                       keyboardType: TextInputType.number,
                       decoration: InputDecoration(
@@ -71,6 +72,7 @@ class PaymentInfoScreen extends StatelessWidget {
                               height: 10,
                             ),
                             TextFormField(
+                              initialValue: "555",
                               textAlign: TextAlign.center,
                               keyboardType: TextInputType.number,
                               decoration: InputDecoration(hintText: "MM/YY"),
@@ -92,6 +94,7 @@ class PaymentInfoScreen extends StatelessWidget {
                               height: 10,
                             ),
                             TextFormField(
+                              initialValue: "555",
                               textAlign: TextAlign.center,
                               keyboardType: TextInputType.number,
                               decoration: InputDecoration(hintText: "111"),
