@@ -1,14 +1,12 @@
+import 'package:checkincheckout/constants/theme.dart';
+import 'package:checkincheckout/pages/intro_screen.dart';
+import 'package:checkincheckout/pages/payment_plan_screen.dart';
+import 'package:checkincheckout/pages/signIn_screen.dart';
 import 'package:flutter/material.dart';
 
-import './utils/const.dart';
-
-import './screens/intro_screens/intro_screen.dart';
-import './screens/intro_screens/intro.dart';
-import './screens/intro_screens/singUp_screens/signUp_screen.dart';
-import './screens/intro_screens/singUp_screens/payment_info_screen.dart';
-import './screens/intro_screens/singUp_screens/payment_plan_screen.dart';
-import './screens/intro_screens/signIn_screens/signIn_screen.dart';
-import './screens/intro_screens/signIn_screens/restore_password_screen.dart';
+import 'pages/payment_info_screen.dart';
+import 'pages/restore_password_screen.dart';
+import 'pages/sign_up_screen.dart';
 
 void main() {
   runApp(MyApp());
@@ -18,58 +16,11 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
-      theme: ThemeData(
-        primarySwatch: mainBlue,
-        accentColor: mainOrange,
-        visualDensity: VisualDensity.adaptivePlatformDensity,
-        buttonColor: mainOrange,
-        appBarTheme: AppBarTheme(
-            iconTheme: IconThemeData(color: appBarIconColor, size: 40),
-            textTheme: TextTheme(
-              headline1: TextStyle(
-                fontSize: midiumTextSize,
-                fontWeight: midiumTextWeight,
-                color: appBarTitleColor,
-              ),
-            )),
-        inputDecorationTheme: InputDecorationTheme(
-          contentPadding: EdgeInsets.all(0),
-          border: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(25),
-            borderSide: BorderSide(
-              color: Colors.grey[900],
-            ),
-          ),
-          hintStyle: TextStyle(
-            color: hintTextColor,
-            fontSize: hintTextSize,
-            fontWeight: hintTextWeight,
-          ),
-        ),
-        textTheme: TextTheme(
-          headline2: TextStyle(
-              fontSize: midiumTextSize,
-              color: midiumTextColor,
-              fontWeight: midiumTextWeight),
-          headline3: TextStyle(
-              fontSize: smallTextSize,
-              color: smallTextColor,
-              fontWeight: smallTextWeight),
-          button: TextStyle(
-              fontSize: mainButtonTextSize,
-              color: mainButtonTextColor,
-              fontWeight: mainBottonTextWeight),
-          headline1: TextStyle(
-              fontSize: midiumTextSize,
-              color: midiumTextColor,
-              fontWeight: midiumTextWeight),
-        ),
-      ),
-      initialRoute: Intro.routeName,
+      title: 'Checkin Checkout',
+      theme: buildLightTheme(),
+      initialRoute: IntroScreen.routeName,
       routes: {
         IntroScreen.routeName: (ctx) => IntroScreen(),
-        Intro.routeName: (ctx) => Intro(),
         SignUpScreen.routeName: (ctx) => SignUpScreen(),
         PaymentInfoScreen.routeName: (ctx) => PaymentInfoScreen(),
         PaymentPlanScreen.routeName: (ctx) => PaymentPlanScreen(),

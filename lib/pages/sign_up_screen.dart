@@ -1,10 +1,9 @@
+import 'package:checkincheckout/constants/theme.dart';
+import 'package:checkincheckout/widgets/mainButton.dart';
+import 'package:checkincheckout/widgets/poor_appbar.dart';
 import 'package:flutter/material.dart';
 
-import '../../widgets/poor_appbar.dart';
-import '../../../utils/const.dart';
-import '../../widgets/mainButton.dart';
-
-import './payment_info_screen.dart';
+import 'payment_info_screen.dart';
 
 class SignUpScreen extends StatelessWidget {
   static final routeName = "SignUpScreen";

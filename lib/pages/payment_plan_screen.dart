@@ -1,9 +1,7 @@
+import 'package:checkincheckout/constants/theme.dart';
+import 'package:checkincheckout/widgets/payment_plan_item_widget.dart';
+import 'package:checkincheckout/widgets/poor_appbar.dart';
 import 'package:flutter/material.dart';
-
-import '../../widgets/poor_appbar.dart';
-import '../components/payment_plan_item_widget.dart';
-
-import '../../../utils/const.dart';
 
 class PaymentPlanScreen extends StatelessWidget {
   static final routeName = "PaymentPlanString";

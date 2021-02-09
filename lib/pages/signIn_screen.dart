@@ -1,12 +1,9 @@
+import 'package:checkincheckout/constants/theme.dart';
+import 'package:checkincheckout/pages/restore_password_screen.dart';
+import 'package:checkincheckout/widgets/logo_widget.dart';
+import 'package:checkincheckout/widgets/mainButton.dart';
+import 'package:checkincheckout/widgets/poor_appbar.dart';
 import 'package:flutter/material.dart';
-
-import '../../widgets/poor_appbar.dart';
-import '../../widgets/mainButton.dart';
-import '../../widgets/logo_widget.dart';
-
-import './restore_password_screen.dart';
-
-import '../../../utils/const.dart';
 
 class SignInScreen extends StatelessWidget {
   static final routeName = "SignInScreen";
