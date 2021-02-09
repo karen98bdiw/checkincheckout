@@ -30,9 +30,15 @@ class SignInScreen extends StatelessWidget {
                   minHeight: constraints.maxHeight),
               child: Container(
                 padding: EdgeInsets.only(
-                    bottom: MediaQuery.of(context).viewInsets.bottom),
+                  top: 100,
+                  bottom: MediaQuery.of(context).viewInsets.bottom + 30,
+                  left:
+                      MediaQuery.of(context).size.width * defaultPaddingProcent,
+                  right:
+                      MediaQuery.of(context).size.width * defaultPaddingProcent,
+                ),
                 child: Column(
-                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: [
                     LogoWidget(),

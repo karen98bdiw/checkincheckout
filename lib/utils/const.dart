@@ -25,7 +25,7 @@ var defaultPaddingProcent = 0.1;
 
 var introText =
     "Ornare enim leo enim urna netus quam sit mattis eget quisque eu";
-var passwordRestorText =
+var passwordRestoreText =
     "Enter the email address you used during registration and we will send a new password";
 
 var mainBorderColor = Colors.grey;
