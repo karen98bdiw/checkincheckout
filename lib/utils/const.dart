@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 var mainBlue = Colors.blue;
 var mainOrange = Colors.orange;
+var mainGrey = Colors.grey;
 var smallTextColor = Colors.grey[900];
 var smallTextSize = 14.0;
 var smallTextWeight = FontWeight.w400;
@@ -24,3 +25,5 @@ var defaultPaddingProcent = 0.1;
 
 var introText =
     "Ornare enim leo enim urna netus quam sit mattis eget quisque eu";
+
+var mainBorderColor = Colors.grey;

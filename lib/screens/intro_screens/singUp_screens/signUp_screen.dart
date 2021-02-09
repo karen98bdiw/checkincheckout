@@ -4,8 +4,12 @@ import '../../widgets/poor_appbar.dart';
 import '../../../utils/const.dart';
 import '../../widgets/mainButton.dart';
 
+import './payment_info_screen.dart';
+
 class SignUpScreen extends StatelessWidget {
   static final routeName = "SignUpScreen";
+
+  BuildContext buildContext;
 
   var _formState = GlobalKey<FormState>();
 
@@ -52,6 +56,7 @@ class SignUpScreen extends StatelessWidget {
     _userDate.forEach((key, value) {
       print(key + ":" + value.toString());
     });
+    Navigator.of(buildContext).pushNamed(PaymentInfoScreen.routeName);
   }
 
   bool _firstNameValidator({@required value}) {
@@ -62,6 +67,7 @@ class SignUpScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    buildContext = context;
     return Scaffold(
       appBar: PoorAppBar(title: "Register"),
       body: SingleChildScrollView(
@@ -106,18 +112,19 @@ class SignUpScreen extends StatelessWidget {
                   validator: _firstNameValidator,
                 ),
                 _formField(
-                  fieldSetter: _email,
-                  text: "Email",
-                  context: context,
-                  controller: _emailCont,
-                  validator: _firstNameValidator,
-                ),
+                    fieldSetter: _email,
+                    text: "Email",
+                    context: context,
+                    controller: _emailCont,
+                    validator: _firstNameValidator,
+                    inputType: TextInputType.emailAddress),
                 _formField(
                   fieldSetter: _phone,
                   text: "Phone",
                   context: context,
                   controller: _phoneCont,
                   validator: _firstNameValidator,
+                  inputType: TextInputType.phone,
                 ),
                 _formField(
                   fieldSetter: _position,
@@ -153,6 +160,7 @@ class SignUpScreen extends StatelessWidget {
                   context: context,
                   controller: _zipCodeCont,
                   validator: _firstNameValidator,
+                  inputType: TextInputType.number,
                 ),
                 SizedBox(
                   height: 20,
@@ -174,7 +182,8 @@ class SignUpScreen extends StatelessWidget {
     @required BuildContext context,
     @required TextEditingController controller,
     @required Function validator, //function for validate will return bool,
-    @required String fieldSetter,
+    @required String fieldSetter, //key for colecting
+    TextInputType inputType,
   }) {
     controller.value = TextEditingValue(text: "sss");
     var inValidText = "Please Write" + " " + text;
@@ -193,6 +202,7 @@ class SignUpScreen extends StatelessWidget {
             height: 10,
           ),
           TextFormField(
+            keyboardType: inputType == null ? TextInputType.text : inputType,
             onSaved: (newValue) => _userDate[fieldSetter] = newValue,
             controller: controller,
             textAlign: TextAlign.center,

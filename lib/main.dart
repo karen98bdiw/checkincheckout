@@ -5,6 +5,8 @@ import './utils/const.dart';
 import './screens/intro_screens/intro_screen.dart';
 import './screens/intro_screens/intro.dart';
 import './screens/intro_screens/singUp_screens/signUp_screen.dart';
+import './screens/intro_screens/singUp_screens/payment_info_screen.dart';
+import './screens/intro_screens/singUp_screens/payment_plan_screen.dart';
 
 void main() {
   runApp(MyApp());
@@ -67,6 +69,8 @@ class MyApp extends StatelessWidget {
         IntroScreen.routeName: (ctx) => IntroScreen(),
         Intro.routeName: (ctx) => Intro(),
         SignUpScreen.routeName: (ctx) => SignUpScreen(),
+        PaymentInfoScreen.routeName: (ctx) => PaymentInfoScreen(),
+        PaymentPlanScreen.routeName: (ctx) => PaymentPlanScreen(),
       },
     );
   }
