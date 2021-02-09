@@ -5,13 +5,41 @@ import '../../widgets/mainButton.dart';
 import '../../widgets/logo_widget.dart';
 
 import './restore_password_screen.dart';
+import '../../main_screens/screens/rootScreen.dart';
 
 import '../../../utils/const.dart';
 
-class SignInScreen extends StatelessWidget {
+class SignInScreen extends StatefulWidget {
   static final routeName = "SignInScreen";
 
+  @override
+  _SignInScreenState createState() => _SignInScreenState();
+}
+
+class _SignInScreenState extends State<SignInScreen> {
   var _formState = GlobalKey<FormState>();
+
+  var _showPassword = false;
+
+  void _toogleShowPassword() {
+    setState(() {
+      _showPassword = !_showPassword;
+    });
+  }
+
+  String _email;
+
+  String _password;
+
+  void _validateForm() {
+    _formState.currentState.validate() ? _saveForm() : print("wrong");
+  }
+
+  void _saveForm() {
+    _formState.currentState.save();
+    print(_email + ":" + _password);
+    Navigator.of(context).pushNamed(MainRootScreen.routeName);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -30,7 +58,7 @@ class SignInScreen extends StatelessWidget {
                   minHeight: constraints.maxHeight),
               child: Container(
                 padding: EdgeInsets.only(
-                  top: 100,
+                  top: 50,
                   bottom: MediaQuery.of(context).viewInsets.bottom + 30,
                   left:
                       MediaQuery.of(context).size.width * defaultPaddingProcent,
@@ -43,7 +71,10 @@ class SignInScreen extends StatelessWidget {
                   children: [
                     LogoWidget(),
                     _inputForm(context: context),
-                    MainButton(text: "SIGN IN", callBack: () {}),
+                    MainButton(
+                      text: "SIGN IN",
+                      callBack: _validateForm,
+                    ),
                   ],
                 ),
               ),
@@ -66,6 +97,8 @@ class SignInScreen extends StatelessWidget {
             height: 10,
           ),
           TextFormField(
+            validator: (value) => value.isEmpty ? "Please write email" : null,
+            onSaved: (newValue) => _email = newValue,
             textAlign: TextAlign.center,
             keyboardType: TextInputType.emailAddress,
             decoration: InputDecoration(
@@ -88,17 +121,39 @@ class SignInScreen extends StatelessWidget {
           SizedBox(
             height: 10,
           ),
-          TextFormField(
-            textAlign: TextAlign.center,
-            decoration: InputDecoration(
-              filled: true,
-              fillColor: Colors.white,
-              hintText: "Password",
-              border: Theme.of(context)
-                  .inputDecorationTheme
-                  .border
-                  .copyWith(borderSide: BorderSide.none),
-            ),
+          Stack(
+            alignment: Alignment.center,
+            children: [
+              TextFormField(
+                obscureText: _showPassword,
+                validator: (value) =>
+                    value.isEmpty ? "Please write password" : null,
+                onSaved: (newValue) => _password = newValue,
+                textAlign: TextAlign.center,
+                decoration: InputDecoration(
+                  filled: true,
+                  fillColor: Colors.white,
+                  hintText: "Password",
+                  border: Theme.of(context)
+                      .inputDecorationTheme
+                      .border
+                      .copyWith(borderSide: BorderSide.none),
+                ),
+              ),
+              Positioned(
+                child: InkWell(
+                  onTap: _toogleShowPassword,
+                  child: Icon(
+                    _showPassword
+                        ? Icons.remove_red_eye_outlined
+                        : Icons.remove_red_eye,
+                    color: mainOrange,
+                  ),
+                ),
+                right: 10,
+                top: 10,
+              ),
+            ],
           ),
           SizedBox(
             height: 5,

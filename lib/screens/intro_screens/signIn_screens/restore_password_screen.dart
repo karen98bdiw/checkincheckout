@@ -26,7 +26,7 @@ class RestorPasswordScreen extends StatelessWidget {
                 minHeight: constraints.maxHeight),
             child: Container(
               padding: EdgeInsets.only(
-                top: 100,
+                top: 50,
                 bottom: MediaQuery.of(context).viewInsets.bottom + 30,
                 left: MediaQuery.of(context).size.width * defaultPaddingProcent,
                 right:
@@ -45,6 +45,13 @@ class RestorPasswordScreen extends StatelessWidget {
                       Text(
                         passwordRestoreText,
                         style: Theme.of(context).textTheme.headline2,
+                      ),
+                      SizedBox(
+                        height: 10,
+                      ),
+                      Text(
+                        "Email",
+                        style: Theme.of(context).inputDecorationTheme.hintStyle,
                       ),
                       SizedBox(
                         height: 10,
