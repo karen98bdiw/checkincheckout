@@ -53,10 +53,6 @@ class RestorPasswordScreen extends StatelessWidget {
                         textAlign: TextAlign.center,
                         keyboardType: TextInputType.emailAddress,
                         decoration: InputDecoration(
-                          border: Theme.of(context)
-                              .inputDecorationTheme
-                              .border
-                              .copyWith(borderSide: BorderSide.none),
                           hintText: "Email",
                           filled: true,
                           fillColor: Colors.white,

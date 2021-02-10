@@ -1,9 +1,10 @@
 import 'package:checkincheckout/constants/theme.dart';
-import 'package:checkincheckout/pages/restore_password_screen.dart';
 import 'package:checkincheckout/widgets/logo_widget.dart';
 import 'package:checkincheckout/widgets/mainButton.dart';
 import 'package:checkincheckout/widgets/poor_appbar.dart';
 import 'package:flutter/material.dart';
+
+import '../router.gr.dart';
 
 class SignInScreen extends StatelessWidget {
   static final routeName = "SignInScreen";
@@ -66,10 +67,6 @@ class SignInScreen extends StatelessWidget {
             textAlign: TextAlign.center,
             keyboardType: TextInputType.emailAddress,
             decoration: InputDecoration(
-              border: Theme.of(context)
-                  .inputDecorationTheme
-                  .border
-                  .copyWith(borderSide: BorderSide.none),
               hintText: "Email",
               filled: true,
               fillColor: Colors.white,
@@ -91,10 +88,6 @@ class SignInScreen extends StatelessWidget {
               filled: true,
               fillColor: Colors.white,
               hintText: "Password",
-              border: Theme.of(context)
-                  .inputDecorationTheme
-                  .border
-                  .copyWith(borderSide: BorderSide.none),
             ),
           ),
           SizedBox(
@@ -102,13 +95,10 @@ class SignInScreen extends StatelessWidget {
           ),
           FlatButton(
             onPressed: () {
-              Navigator.of(context).pushNamed(RestorPasswordScreen.routeName);
+              Navigator.of(context).pushNamed(Routes.restorPasswordScreen);
             },
             child: Text(
               "Forgot Password?",
-              style: Theme.of(context).inputDecorationTheme.hintStyle.copyWith(
-                    decoration: TextDecoration.underline,
-                  ),
             ),
           )
         ],

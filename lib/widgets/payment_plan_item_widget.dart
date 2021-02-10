@@ -1,6 +1,7 @@
 import 'package:checkincheckout/constants/theme.dart';
-import 'package:checkincheckout/pages/signIn_screen.dart';
 import 'package:flutter/material.dart';
+
+import '../router.gr.dart';
 
 class PaymentPlanItemWidget extends StatelessWidget {
   BuildContext _buildContext;
@@ -20,7 +21,7 @@ class PaymentPlanItemWidget extends StatelessWidget {
   });
 
   void _onItemSelect() {
-    Navigator.of(_buildContext).pushNamed(SignInScreen.routeName);
+    Navigator.of(_buildContext).pushNamed(Routes.signInScreen);
   }
 
   @override
@@ -68,9 +69,6 @@ class PaymentPlanItemWidget extends StatelessWidget {
           ),
           Text(
             itemTitle,
-            style: Theme.of(context).textTheme.headline3.copyWith(
-                  color: Colors.white,
-                ),
           ),
           Positioned(
             right: 0,
@@ -233,9 +231,6 @@ class PaymentPlanItemWidget extends StatelessWidget {
               )),
           child: Text(
             "PREMIUM",
-            style: Theme.of(context).textTheme.headline3.copyWith(
-                  color: Colors.white,
-                ),
             textAlign: TextAlign.center,
           ),
         )

@@ -1,8 +1,9 @@
 import 'package:checkincheckout/constants/theme.dart';
-import 'package:checkincheckout/pages/payment_plan_screen.dart';
 import 'package:checkincheckout/widgets/mainButton.dart';
 import 'package:checkincheckout/widgets/poor_appbar.dart';
 import 'package:flutter/material.dart';
+
+import '../router.gr.dart';
 
 class PaymentInfoScreen extends StatelessWidget {
   static final routeName = "PaymentInfoScreen";
@@ -20,7 +21,7 @@ class PaymentInfoScreen extends StatelessWidget {
   void _saveForm() {
     _formState.currentState.save();
     print(cardNumber + ":" + cardDuration + ":" + cardCVV);
-    Navigator.of(_buildContext).pushNamed(PaymentPlanScreen.routeName);
+    Navigator.of(_buildContext).pushNamed(Routes.paymentPlanScreen);
   }
 
   @override

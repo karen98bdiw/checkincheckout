@@ -1,9 +1,9 @@
 import 'package:checkincheckout/constants/theme.dart';
-import 'package:checkincheckout/pages/signIn_screen.dart';
-import 'package:checkincheckout/pages/sign_up_screen.dart';
 import 'package:checkincheckout/widgets/logo_widget.dart';
 import 'package:checkincheckout/widgets/mainButton.dart';
 import 'package:flutter/material.dart';
+
+import '../router.gr.dart';
 
 class IntroScreen extends StatelessWidget {
   static final routeName = "IntroScreen";
@@ -38,7 +38,7 @@ class IntroScreen extends StatelessWidget {
               MainButton(
                 text: "SIGN IN",
                 callBack: () {
-                  Navigator.of(context).pushNamed(SignInScreen.routeName);
+                  Navigator.of(context).pushNamed(Routes.signInScreen);
                 },
               ),
               SizedBox(
@@ -47,7 +47,7 @@ class IntroScreen extends StatelessWidget {
               MainButton(
                 text: "REGISTER",
                 callBack: () {
-                  Navigator.of(context).pushNamed(SignUpScreen.routeName);
+                  Navigator.of(context).pushNamed(Routes.signUpScreen);
                 },
               ),
             ],
