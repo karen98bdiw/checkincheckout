@@ -15,7 +15,6 @@ class PoorAppBar extends StatelessWidget with PreferredSizeWidget {
       elevation: 0,
       title: Text(
         title,
-        style: Theme.of(context).appBarTheme.textTheme.headline1,
       ),
       centerTitle: true,
       leading: IconButton(

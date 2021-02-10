@@ -1,10 +1,9 @@
+import 'package:checkincheckout/constants/theme.dart';
 import 'package:flutter/material.dart';
 
-import '../../widgets/poor_appbar.dart';
-import '../../widgets/logo_widget.dart';
-import '../../widgets/mainButton.dart';
-
-import '../../../utils/const.dart';
+import '../widgets/logo_widget.dart';
+import '../widgets/mainButton.dart';
+import '../widgets/poor_appbar.dart';
 
 class RestorPasswordScreen extends StatelessWidget {
   static final routeName = "RestorePasswordScreen";
@@ -61,10 +60,6 @@ class RestorPasswordScreen extends StatelessWidget {
                         textAlign: TextAlign.center,
                         keyboardType: TextInputType.emailAddress,
                         decoration: InputDecoration(
-                          border: Theme.of(context)
-                              .inputDecorationTheme
-                              .border
-                              .copyWith(borderSide: BorderSide.none),
                           hintText: "Email",
                           filled: true,
                           fillColor: Colors.white,

@@ -1,10 +1,9 @@
+import 'package:checkincheckout/constants/theme.dart';
+import 'package:checkincheckout/widgets/mainButton.dart';
+import 'package:checkincheckout/widgets/poor_appbar.dart';
 import 'package:flutter/material.dart';
 
-import '../../widgets/poor_appbar.dart';
-import '../../../utils/const.dart';
-import '../../widgets/mainButton.dart';
-
-import './payment_info_screen.dart';
+import '../router.gr.dart';
 
 class SignUpScreen extends StatelessWidget {
   static final routeName = "SignUpScreen";
@@ -56,7 +55,7 @@ class SignUpScreen extends StatelessWidget {
     _userDate.forEach((key, value) {
       print(key + ":" + value.toString());
     });
-    Navigator.of(buildContext).pushNamed(PaymentInfoScreen.routeName);
+    Navigator.of(buildContext).pushNamed(Routes.paymentInfoScreen);
   }
 
   bool _firstNameValidator({@required value}) {
