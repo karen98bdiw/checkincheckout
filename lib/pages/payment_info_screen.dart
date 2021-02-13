@@ -3,10 +3,40 @@ import 'package:checkincheckout/widgets/mainButton.dart';
 import 'package:checkincheckout/widgets/poor_appbar.dart';
 import 'package:flutter/material.dart';
 
+import '../widgets/outlined_text_field.dart';
+
 import '../router.gr.dart';
 
-class PaymentInfoScreen extends StatelessWidget {
+class PaymentInfoScreen extends StatefulWidget {
   static final routeName = "PaymentInfoScreen";
+
+  @override
+  _PaymentInfoScreenState createState() => _PaymentInfoScreenState();
+}
+
+class _PaymentInfoScreenState extends State<PaymentInfoScreen> {
+  final _cardNumberCont = TextEditingController();
+
+  final _dateCont = TextEditingController();
+
+  final _cvvCont = TextEditingController();
+
+  final _cardNumberNode = FocusNode();
+
+  final _dateNode = FocusNode();
+
+  final _cvvNode = FocusNode();
+
+  @override
+  void dispose() {
+    _cardNumberNode.dispose();
+    _dateNode.dispose();
+    _cvvNode.dispose();
+    _cardNumberCont.dispose();
+    _dateCont.dispose();
+    _cvvCont.dispose();
+    super.dispose();
+  }
 
   BuildContext _buildContext;
 
@@ -20,112 +50,94 @@ class PaymentInfoScreen extends StatelessWidget {
 
   void _saveForm() {
     _formState.currentState.save();
-    print(cardNumber + ":" + cardDuration + ":" + cardCVV);
     Navigator.of(_buildContext).pushNamed(Routes.paymentPlanScreen);
   }
 
   @override
   Widget build(BuildContext context) {
     _buildContext = context;
+    var _bottomInsets = MediaQuery.of(context).viewInsets.bottom;
     return Scaffold(
-        appBar: PoorAppBar(title: "Payment Information"),
-        body: Padding(
-          padding: EdgeInsets.symmetric(
-              vertical: 10,
-              horizontal:
-                  MediaQuery.of(context).size.width * defaultPaddingProcent),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            children: [
-              Form(
-                key: _formState,
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.stretch,
-                  children: [
-                    _fieldTitle(text: "Card Number", context: context),
-                    SizedBox(
-                      height: 10,
-                    ),
-                    TextFormField(
-                      initialValue: "555",
-                      textAlign: TextAlign.center,
-                      keyboardType: TextInputType.number,
-                      decoration: InputDecoration(
-                        hintText: "1111 1111 1111 1111",
-                      ),
-                      validator: (value) =>
-                          value.isEmpty ? "Please write Card Number" : null,
-                      onSaved: (newValue) => cardNumber = newValue,
-                    ),
-                    SizedBox(
-                      height: 10,
-                    ),
-                    Row(
+      appBar: PoorAppBar(title: "Payment Information", context: context),
+      body: LayoutBuilder(
+        builder: (ctx, constraints) => SingleChildScrollView(
+          child: ConstrainedBox(
+            constraints: BoxConstraints(
+                minWidth: constraints.maxWidth,
+                minHeight: constraints.maxHeight),
+            child: Padding(
+              padding: EdgeInsets.only(
+                top: 2,
+                left: MediaQuery.of(context).size.width * defaultPaddingProcent,
+                right:
+                    MediaQuery.of(context).size.width * defaultPaddingProcent,
+                bottom: _bottomInsets > 0 ? _bottomInsets : 41,
+              ),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                children: [
+                  Form(
+                    key: _formState,
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.stretch,
                       children: [
-                        Expanded(
-                            child: Column(
-                          children: [
-                            _fieldTitle(text: "Valit Until", context: context),
-                            SizedBox(
-                              height: 10,
-                            ),
-                            TextFormField(
-                              initialValue: "555",
-                              textAlign: TextAlign.center,
-                              keyboardType: TextInputType.number,
-                              decoration: InputDecoration(hintText: "MM/YY"),
-                              validator: (value) => value.isEmpty
-                                  ? "Please write Card Year"
-                                  : null,
-                              onSaved: (newValue) => cardDuration = newValue,
-                            ),
-                          ],
-                        )),
-                        SizedBox(
-                          width: 10,
+                        OutlinedTextField(
+                          title: "Card Number",
+                          hintText: "1111 1111 1111 1111",
+                          controller: _cardNumberCont,
+                          focusNode: _cardNumberNode,
+                          onSubmitted: (v) {
+                            _dateNode.requestFocus();
+                          },
+                          action: TextInputAction.next,
                         ),
-                        Expanded(
-                            child: Column(
+                        SizedBox(
+                          height: 12,
+                        ),
+                        Row(
                           children: [
-                            _fieldTitle(text: "CVV", context: context),
-                            SizedBox(
-                              height: 10,
+                            Expanded(
+                              child: OutlinedTextField(
+                                title: "Valid Until",
+                                hintText: "MM/YY",
+                                controller: _dateCont,
+                                focusNode: _dateNode,
+                                onSubmitted: (v) {
+                                  _cvvNode.requestFocus();
+                                },
+                                action: TextInputAction.next,
+                              ),
                             ),
-                            TextFormField(
-                              initialValue: "555",
-                              textAlign: TextAlign.center,
-                              keyboardType: TextInputType.number,
-                              decoration: InputDecoration(hintText: "111"),
-                              validator: (value) => value.isEmpty
-                                  ? "Please write Card CVV Code"
-                                  : null,
-                              onSaved: (newValue) => cardCVV = newValue,
+                            SizedBox(
+                              width: 14,
+                            ),
+                            Expanded(
+                              child: OutlinedTextField(
+                                title: "CVV",
+                                hintText: "111",
+                                controller: _cvvCont,
+                                focusNode: _cvvNode,
+                                onSubmitted: (v) {
+                                  _cvvNode.unfocus();
+                                },
+                              ),
                             ),
                           ],
-                        ))
+                        ),
                       ],
                     ),
-                  ],
-                ),
+                  ),
+                  MainButton(
+                    text: "CONFIRM",
+                    callBack: _validateForm,
+                  ),
+                ],
               ),
-              MainButton(
-                text: "CONFIRM",
-                callBack: _validateForm,
-              ),
-            ],
+            ),
           ),
-        ));
-  }
-
-  Widget _fieldTitle({
-    @required String text,
-    @required BuildContext context,
-  }) {
-    return Text(
-      text,
-      textAlign: TextAlign.center,
-      style: Theme.of(context).textTheme.headline3,
+        ),
+      ),
     );
   }
 }

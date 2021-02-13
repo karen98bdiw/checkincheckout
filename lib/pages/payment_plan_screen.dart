@@ -4,19 +4,22 @@ import 'package:checkincheckout/widgets/poor_appbar.dart';
 import 'package:flutter/material.dart';
 
 class PaymentPlanScreen extends StatelessWidget {
-  static final routeName = "PaymentPlanString";
+  static final routeName = "PaymnetPlanScreen";
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: PoorAppBar(title: "Select Plan"),
+      appBar: PoorAppBar(
+        title: "Select Plan",
+        context: context,
+      ),
       body: SingleChildScrollView(
         child: Padding(
-          padding: EdgeInsets.symmetric(
-            vertical: 15,
-            horizontal:
-                MediaQuery.of(context).size.width * defaultPaddingProcent,
-          ),
+          padding: EdgeInsets.only(
+              top: 24,
+              left: MediaQuery.of(context).size.width * defaultPaddingProcent,
+              right: MediaQuery.of(context).size.width * defaultPaddingProcent,
+              bottom: 42),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [

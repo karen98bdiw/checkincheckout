@@ -33,7 +33,7 @@ class IntroScreen extends StatelessWidget {
                 style: TextStyle(color: Gray6, fontSize: 18),
               ),
               SizedBox(
-                height: 10,
+                height: 11,
               ),
               MainButton(
                 text: "SIGN IN",
@@ -42,7 +42,7 @@ class IntroScreen extends StatelessWidget {
                 },
               ),
               SizedBox(
-                height: 20,
+                height: 18,
               ),
               MainButton(
                 text: "REGISTER",

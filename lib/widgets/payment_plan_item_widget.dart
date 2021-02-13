@@ -27,7 +27,8 @@ class PaymentPlanItemWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     _buildContext = context;
-    return Container(
+    return ClipRRect(
+      borderRadius: BorderRadius.circular(22),
       child: Column(
         mainAxisSize: MainAxisSize.min,
         crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -42,16 +43,11 @@ class PaymentPlanItemWidget extends StatelessWidget {
 
   Widget _itemTop({@required BuildContext context}) {
     return Container(
+      color: mainBlue,
       padding: EdgeInsets.symmetric(
-        vertical: 8,
+        vertical: 12,
         horizontal: 18,
       ),
-      decoration: BoxDecoration(
-          color: mainBlue,
-          borderRadius: BorderRadius.only(
-            topLeft: Radius.circular(25),
-            topRight: Radius.circular(25),
-          )),
       child: Stack(
         alignment: Alignment.center,
         overflow: Overflow.visible,
@@ -68,19 +64,37 @@ class PaymentPlanItemWidget extends StatelessWidget {
             ),
           ),
           Text(
-            itemTitle,
+            itemTitle.toUpperCase(),
+            style: TextStyle(
+              fontSize: 14,
+              color: Colors.white,
+              fontWeight: FontWeight.w700,
+            ),
           ),
           Positioned(
-            right: 0,
-            bottom: -40,
-            child: CircleAvatar(
-              radius: 30,
-              backgroundColor: mainOrange,
+            right: 19,
+            top: 12,
+            child: Container(
+              alignment: Alignment.center,
+              height: 70,
+              width: 70,
+              decoration: BoxDecoration(
+                color: mainOrange,
+                shape: BoxShape.circle,
+              ),
+              padding: EdgeInsets.symmetric(
+                horizontal: 8,
+                vertical: 12,
+              ),
               child: Text(
-                "${saveMoney}\$  SAVE",
+                "${saveMoney.toStringAsFixed(0)}\$  SAVE",
                 overflow: TextOverflow.clip,
                 textAlign: TextAlign.center,
-                style: TextStyle(color: Colors.white, fontSize: 12),
+                style: TextStyle(
+                  color: Colors.white,
+                  fontSize: 12,
+                  fontWeight: FontWeight.w700,
+                ),
               ),
             ),
           ),
@@ -91,9 +105,10 @@ class PaymentPlanItemWidget extends StatelessWidget {
 
   Widget _itemMiddle({@required BuildContext context}) {
     return Container(
-      padding: EdgeInsets.symmetric(
-        horizontal: 18,
-        vertical: 12,
+      padding: EdgeInsets.only(
+        top: 12,
+        bottom: 7,
+        right: 7,
       ),
       decoration: BoxDecoration(
         border: Border.symmetric(
@@ -106,23 +121,31 @@ class PaymentPlanItemWidget extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
-          Text(
-            "\$ ${monthPrice.toStringAsFixed(2)}",
-            overflow: TextOverflow.clip,
-            textAlign: TextAlign.left,
-            style: TextStyle(
-              color: mainBlue,
-              fontSize: 30,
-              fontWeight: FontWeight.w900,
-            ),
-          ),
-          Text(
-            "per moth",
-            textAlign: TextAlign.left,
-            style: TextStyle(
-              fontSize: 20,
-              fontWeight: FontWeight.w700,
-              color: Colors.black,
+          Padding(
+            padding: EdgeInsets.only(left: 18),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  "\$ ${monthPrice.toStringAsFixed(2)}",
+                  overflow: TextOverflow.clip,
+                  textAlign: TextAlign.left,
+                  style: TextStyle(
+                    color: mainBlue,
+                    fontSize: 30,
+                    fontWeight: FontWeight.w900,
+                  ),
+                ),
+                Text(
+                  "per moth",
+                  textAlign: TextAlign.left,
+                  style: TextStyle(
+                    fontSize: 20,
+                    fontWeight: FontWeight.w700,
+                    color: Color.fromRGBO(48, 48, 48, 1),
+                  ),
+                ),
+              ],
             ),
           ),
           Text(
@@ -132,16 +155,18 @@ class PaymentPlanItemWidget extends StatelessWidget {
             style: TextStyle(
               fontSize: 17,
               fontWeight: FontWeight.w700,
-              color: Colors.black,
+              color: Color.fromRGBO(17, 34, 63, 1),
             ),
           ),
-          Row(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Flexible(
-                flex: 1,
-                child: OutlineButton(
+          Padding(
+            padding: const EdgeInsets.only(
+              left: 8.0,
+            ),
+            child: Row(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                OutlineButton(
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(8),
                   ),
@@ -152,49 +177,53 @@ class PaymentPlanItemWidget extends StatelessWidget {
                     style: TextStyle(
                       fontWeight: FontWeight.w500,
                       fontSize: 18,
-                      color: mainGrey,
+                      color: Color.fromRGBO(162, 162, 162, 1),
                     ),
                   ),
-                  padding: EdgeInsets.symmetric(
-                    // horizontal: 20,
-                    vertical: 10,
+                  padding: EdgeInsets.only(
+                    top: 3,
+                    bottom: 9,
+                    left: 24,
+                    right: 24,
                   ),
                 ),
-              ),
-              SizedBox(
-                width: 10,
-              ),
-              Flexible(
-                flex: 2,
-                child: RichText(
-                  text: TextSpan(
-                    children: [
-                      TextSpan(
-                        text: "one-time payment per month for",
-                        style: TextStyle(
-                          color: Colors.black,
-                          fontSize: 12,
+                SizedBox(
+                  width: 8,
+                ),
+                Expanded(
+                  child: RichText(
+                    textAlign: TextAlign.right,
+                    // maxLines: 2,
+                    text: TextSpan(
+                      children: [
+                        TextSpan(
+                          text: "one-time payment per month for a",
+                          style: TextStyle(
+                              color: Color.fromRGBO(162, 162, 162, 1),
+                              fontSize: 12,
+                              fontWeight: FontWeight.w400),
                         ),
-                      ),
-                      TextSpan(
-                        text: " per year",
-                        style: TextStyle(
-                            color: Colors.black,
+                        TextSpan(
+                          text: " year's purchase",
+                          style: TextStyle(
+                              color: Colors.black,
+                              fontSize: 12,
+                              fontWeight: FontWeight.w700),
+                        ),
+                        TextSpan(
+                          text: " per user",
+                          style: TextStyle(
+                            color: Color.fromRGBO(162, 162, 162, 1),
                             fontSize: 12,
-                            fontWeight: FontWeight.w700),
-                      ),
-                      TextSpan(
-                        text: " per user",
-                        style: TextStyle(
-                          color: Colors.black,
-                          fontSize: 12,
+                            fontWeight: FontWeight.w400,
+                          ),
                         ),
-                      ),
-                    ],
+                      ],
+                    ),
                   ),
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
         ],
       ),
@@ -206,32 +235,31 @@ class PaymentPlanItemWidget extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
         Container(
-          padding: EdgeInsets.symmetric(vertical: 5),
+          padding: EdgeInsets.symmetric(vertical: 4),
           color: mainOrange,
           child: Text(
             "${trialDuration.toInt()} DAY TRIAL",
-            style: TextStyle(fontSize: 12, color: Colors.white),
+            style: TextStyle(
+              fontSize: 12,
+              color: Gray6,
+              fontWeight: FontWeight.w700,
+            ),
             textAlign: TextAlign.center,
           ),
         ),
         Container(
+          color: Color.fromRGBO(225, 225, 225, 1),
           padding: EdgeInsets.symmetric(
-            vertical: 8,
-            horizontal: 18,
+            vertical: 12,
           ),
-          decoration: BoxDecoration(
-              color: mainGrey,
-              border: Border.all(
-                color: mainBorderColor,
-                width: 1,
-              ),
-              borderRadius: BorderRadius.only(
-                bottomLeft: Radius.circular(25),
-                bottomRight: Radius.circular(25),
-              )),
           child: Text(
             "PREMIUM",
             textAlign: TextAlign.center,
+            style: TextStyle(
+              fontSize: 12,
+              fontWeight: FontWeight.w500,
+              color: Color.fromRGBO(116, 116, 116, 1),
+            ),
           ),
         )
       ],

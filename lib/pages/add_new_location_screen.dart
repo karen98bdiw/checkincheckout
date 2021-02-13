@@ -1,47 +1,20 @@
-import 'package:checkincheckout/constants/theme.dart';
-import 'package:checkincheckout/widgets/mainButton.dart';
-import 'package:checkincheckout/widgets/poor_appbar.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
+
+import '../widgets/mainButton.dart';
 import '../widgets/outlined_text_field.dart';
+import '../constants/theme.dart';
+import '../widgets/poor_appbar.dart';
 
-import '../router.gr.dart';
-
-class SignUpScreen extends StatefulWidget {
-  static final routeName = "SignUpScreen";
-
+class AddNewLocationScreen extends StatefulWidget {
+  static final routeName = "AddNewLocationScreen";
   @override
-  _SignUpScreenState createState() => _SignUpScreenState();
+  _AddNewLocationScreenState createState() => _AddNewLocationScreenState();
 }
 
-class _SignUpScreenState extends State<SignUpScreen> {
+class _AddNewLocationScreenState extends State<AddNewLocationScreen> {
   BuildContext buildContext;
 
   var _formState = GlobalKey<FormState>();
-
-  // Map<String, Object> _userDate = {};
-
-  // String _userFirstName = "userFirstName";
-
-  // String _userMiddleName = "userMiddleName";
-
-  // String _userLastName = "userLastName";
-
-  // String _company = "company";
-
-  // String _email = "email";
-
-  // String _phone = "phone";
-
-  // String _position = "position";
-
-  // String _street = "street";
-
-  // String _city = "city";
-
-  // String _state = "state";
-
-  // String _zipCode = "zipCode";
 
   final _firstNameCont = TextEditingController();
 
@@ -122,7 +95,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
 
   void colectData() {
     _formState.currentState.save();
-    Navigator.of(buildContext).pushNamed(Routes.paymentInfoScreen);
+    Navigator.of(buildContext).pop();
   }
 
   String _firstNameValidator(v) {
@@ -131,7 +104,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
 
   void _saveFormField(value) {
     print(value);
-  } //fix
+  }
 
   @override
   Widget build(BuildContext context) {

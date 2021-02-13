@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
 class LogoWidget extends StatelessWidget {
   @override
@@ -7,9 +8,7 @@ class LogoWidget extends StatelessWidget {
       height: MediaQuery.of(context).size.height * 0.12,
       decoration: BoxDecoration(
         image: DecorationImage(
-          image: AssetImage(
-            "assets/images/mainLogo.png",
-          ),
+          image: AssetImage("assets/images/mainLogo.png"),
         ),
       ),
     );
