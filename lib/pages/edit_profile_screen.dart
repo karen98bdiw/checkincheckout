@@ -35,7 +35,26 @@ class EditProfileScreen extends StatelessWidget {
               Notifications(),
               _breaks(),
               _subscriptions(context: context),
-              _paymentMethod()
+              _paymentMethod(),
+              SizedBox(
+                height: 55,
+              ),
+              MainButton(
+                text: "CANCEL",
+                isOutlined: true,
+                callBack: () {
+                  Navigator.of(context).pop();
+                },
+              ),
+              SizedBox(
+                height: 12,
+              ),
+              MainButton(
+                text: "SAVE",
+                callBack: () {
+                  Navigator.of(context).pop();
+                },
+              ),
             ],
           ),
         ),
@@ -448,7 +467,7 @@ class EditProfileScreen extends StatelessWidget {
           MainButton(
             text: "UNSUBSCRIBE",
             callBack: () {},
-            isOutlined: false,
+            isOutlined: true,
           ),
           SizedBox(
             height: 12,
@@ -466,18 +485,38 @@ class EditProfileScreen extends StatelessWidget {
 
   Widget _paymentMethod() {
     return Padding(
-      padding: EdgeInsets.only(top: 29),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.stretch,
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          PaymnetMethodWidget(
-              title: "Master Card",
-              cardNumber: "**1234",
-              asset: "assets/images/mCard.png")
-        ],
-      ),
-    );
+        padding: EdgeInsets.only(top: 29),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                PaymnetMethodWidget(
+                    title: "Master Card",
+                    cardNumber: "**1234",
+                    asset: "assets/images/mCard.png")
+              ],
+            ),
+            SizedBox(
+              height: 20,
+            ),
+            FlatButton(
+              onPressed: () {},
+              child: Text(
+                "Add Payment Method",
+                style: TextStyle(
+                  color: Color.fromRGBO(45, 156, 219, 1),
+                  fontSize: 18,
+                  fontWeight: FontWeight.w500,
+                  decoration: TextDecoration.underline,
+                ),
+              ),
+            ),
+          ],
+        ));
   }
 }
 

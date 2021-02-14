@@ -25,37 +25,44 @@ class PaymnetMethodWidget extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.center,
         mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: [
-          Image.asset(
-            "assets/images/mCard.png",
-            height: 36,
+          Expanded(
+            child: Image.asset(
+              "assets/images/mCard.png",
+              height: 36,
+              width: 59,
+            ),
           ),
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              Text(
-                title,
-                style: TextStyle(
-                    color: Colors.black,
-                    fontSize: 14,
-                    fontWeight: FontWeight.w400),
-              ),
-              Text(
-                cardNumber,
-                style: TextStyle(
-                  color: Gray3,
-                  fontSize: 14,
-                  fontWeight: FontWeight.w400,
+          Expanded(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Text(
+                  title,
+                  style: TextStyle(
+                      color: Colors.black,
+                      fontSize: 14,
+                      fontWeight: FontWeight.w400),
                 ),
-              ),
-            ],
+                Text(
+                  cardNumber,
+                  style: TextStyle(
+                    color: Gray3,
+                    fontSize: 14,
+                    fontWeight: FontWeight.w400,
+                  ),
+                ),
+              ],
+            ),
           ),
-          GestureDetector(
-            onTap: () {},
-            child: Icon(
-              Icons.delete,
-              color: mainOrange,
-              size: 30,
+          Expanded(
+            child: GestureDetector(
+              onTap: () {},
+              child: Icon(
+                Icons.delete,
+                color: mainOrange,
+                size: 30,
+              ),
             ),
           )
         ],

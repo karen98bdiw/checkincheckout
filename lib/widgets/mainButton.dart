@@ -18,16 +18,17 @@ class MainButton extends StatelessWidget {
           vertical: MediaQuery.of(context).size.height * 0.02),
       child: Text(text,
           style: TextStyle(
-              color:
-                  isOutlined == null || isOutlined == true ? Gray6 : mainOrange,
+              color: isOutlined == null || isOutlined == false
+                  ? Gray6
+                  : mainOrange,
               fontSize: 18)),
-      color: isOutlined == null || isOutlined == true
+      color: isOutlined == null || isOutlined == false
           ? Theme.of(context).buttonColor
           : Colors.transparent,
       onPressed: callBack,
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(25),
-        side: isOutlined == null || isOutlined == true
+        side: isOutlined == null || isOutlined == false
             ? BorderSide.none
             : BorderSide(color: mainOrange),
       ),

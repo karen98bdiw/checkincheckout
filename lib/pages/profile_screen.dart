@@ -66,28 +66,61 @@ class _ProfileScreenState extends State<ProfileScreen> {
   }
 
   Widget _topView({@required BuildContext context}) {
-    return Stack(
-      children: [
-        Container(
-          child: ClipPath(
-            clipper: MyClipper(context: context),
-            child: Container(
-              width: MediaQuery.of(context).size.width,
-              height: 375 / 2,
-              color: mainBlue,
+    return Container(
+      child: Stack(
+        children: [
+          Container(
+            child: ClipPath(
+              clipper: MyClipper(context: context),
+              child: Container(
+                width: MediaQuery.of(context).size.width,
+                height: 375 / 2,
+                color: mainBlue,
+              ),
             ),
           ),
-        ),
-        Container(
-          padding: EdgeInsets.only(top: 50),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.end,
-            children: [
-              Container(
-                child: GestureDetector(
+          Container(
+            padding: EdgeInsets.only(top: 50),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.end,
+              children: [
+                Container(
+                  child: GestureDetector(
+                    onTap: () {
+                      Navigator.of(context).pop();
+                    },
+                    child: Container(
+                      width: 40,
+                      height: 40,
+                      decoration: BoxDecoration(
+                        color: mainOrange,
+                        shape: BoxShape.circle,
+                      ),
+                      child: Center(
+                        child: Icon(
+                          Icons.arrow_back_ios,
+                          color: Colors.white,
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+                Container(
+                  width: 170,
+                  height: 170,
+                  decoration: BoxDecoration(
+                    shape: BoxShape.circle,
+                    color: Color.fromRGBO(196, 196, 196, 1),
+                    image: DecorationImage(
+                      image: AssetImage("assets/images/profilePic.png"),
+                      fit: BoxFit.fill,
+                    ),
+                  ),
+                ),
+                GestureDetector(
                   onTap: () {
-                    Navigator.of(context).pop();
+                    Navigator.of(context).pushNamed(Routes.editProfileScreen);
                   },
                   child: Container(
                     width: 40,
@@ -98,48 +131,17 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     ),
                     child: Center(
                       child: Icon(
-                        Icons.arrow_back_ios,
+                        Icons.edit,
                         color: Colors.white,
                       ),
                     ),
                   ),
                 ),
-              ),
-              Container(
-                width: 170,
-                height: 170,
-                decoration: BoxDecoration(
-                  shape: BoxShape.circle,
-                  color: Color.fromRGBO(196, 196, 196, 1),
-                  image: DecorationImage(
-                    image: AssetImage("assets/images/profilePic.png"),
-                    fit: BoxFit.fill,
-                  ),
-                ),
-              ),
-              GestureDetector(
-                onTap: () {
-                  Navigator.of(context).pushNamed(Routes.editProfileScreen);
-                },
-                child: Container(
-                  width: 40,
-                  height: 40,
-                  decoration: BoxDecoration(
-                    color: mainOrange,
-                    shape: BoxShape.circle,
-                  ),
-                  child: Center(
-                    child: Icon(
-                      Icons.edit,
-                      color: Colors.white,
-                    ),
-                  ),
-                ),
-              ),
-            ],
+              ],
+            ),
           ),
-        ),
-      ],
+        ],
+      ),
     );
   }
 
