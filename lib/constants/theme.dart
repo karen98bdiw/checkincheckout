@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 const Gray6 = Color(0xFFF2F2F2);
 const Gray1 = Color.fromRGBO(51, 51, 51, 1);
 const Gray2 = Color.fromRGBO(79, 79, 79, 1);
+const Gray3 = Color.fromRGBO(189, 189, 189, 1);
 const Gray5 = Color.fromRGBO(224, 224, 224, 1);
 const Gray4 = Color.fromRGBO(189, 189, 189, 1);
 

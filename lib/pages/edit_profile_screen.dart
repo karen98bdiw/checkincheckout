@@ -1,9 +1,12 @@
+import 'package:checkincheckout/router.gr.dart';
 import 'package:flutter/material.dart';
 
 import '../widgets/poor_appbar.dart';
 import '../constants/theme.dart';
 import '../widgets/outlined_text_field.dart';
 import '../widgets/custom_switch.dart';
+import '../widgets/payment_method_widget.dart';
+import '../widgets/mainButton.dart';
 
 class EditProfileScreen extends StatelessWidget {
   static final routeName = "EditProfileScreen";
@@ -31,7 +34,8 @@ class EditProfileScreen extends StatelessWidget {
               _form(),
               Notifications(),
               _breaks(),
-              _currentSubrscription(),
+              _subscriptions(context: context),
+              _paymentMethod()
             ],
           ),
         ),
@@ -290,12 +294,188 @@ class EditProfileScreen extends StatelessWidget {
     );
   }
 
-  Widget _currentSubrscription() {
+  Widget _subscriptions({@required BuildContext context}) {
     return Padding(
       padding: EdgeInsets.only(top: 89),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         mainAxisSize: MainAxisSize.min,
+        children: [
+          Row(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Text(
+                    "Curent subscription",
+                    overflow: TextOverflow.clip,
+                    style: TextStyle(
+                        fontSize: 16,
+                        fontWeight: FontWeight.w400,
+                        color: Color.fromRGBO(34, 49, 66, 1)),
+                  ),
+                  SizedBox(
+                    height: 1,
+                  ),
+                  Text(
+                    "PRO",
+                    overflow: TextOverflow.clip,
+                    style: TextStyle(
+                        color: Color.fromRGBO(45, 156, 219, 1),
+                        fontSize: 28,
+                        fontWeight: FontWeight.w700),
+                  )
+                ],
+              ),
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Text(
+                    "\$119.9",
+                    overflow: TextOverflow.clip,
+                    style: TextStyle(
+                        fontSize: 28,
+                        fontWeight: FontWeight.w700,
+                        color: Color.fromRGBO(45, 156, 219, 1)),
+                  ),
+                  SizedBox(
+                    height: 1,
+                  ),
+                  Text(
+                    "per month",
+                    overflow: TextOverflow.clip,
+                    style: TextStyle(
+                        color: Color.fromRGBO(189, 189, 189, 1),
+                        fontSize: 14,
+                        fontWeight: FontWeight.w400),
+                  )
+                ],
+              )
+            ],
+          ),
+          SizedBox(
+            height: 2,
+          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      "\$714.34",
+                      overflow: TextOverflow.clip,
+                      style: TextStyle(
+                        color: Colors.black,
+                        fontSize: 14,
+                        fontWeight: FontWeight.w400,
+                      ),
+                    ),
+                    Text(
+                      "one-time payment per month \nfor a 6 month subscription,",
+                      textAlign: TextAlign.left,
+                      style: TextStyle(
+                        color: Color.fromRGBO(189, 189, 189, 1),
+                        fontSize: 14,
+                        fontWeight: FontWeight.w400,
+                      ),
+                    ),
+                    SizedBox(
+                      height: 11,
+                    ),
+                    Text(
+                      "Subscription is active",
+                      textAlign: TextAlign.left,
+                      overflow: TextOverflow.clip,
+                      style: TextStyle(
+                        color: Colors.black,
+                        fontSize: 14,
+                        fontWeight: FontWeight.w400,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              Container(
+                width: 80,
+                height: 80,
+                decoration: BoxDecoration(
+                  color: mainOrange,
+                  shape: BoxShape.circle,
+                ),
+                child: Center(
+                  child: Text(
+                    "480\$ SAVE",
+                    overflow: TextOverflow.clip,
+                    textAlign: TextAlign.center,
+                    style: TextStyle(
+                      color: Gray6,
+                      fontSize: 18,
+                      fontWeight: FontWeight.w700,
+                    ),
+                  ),
+                ),
+              )
+            ],
+          ),
+          Text(
+            "Next payment in February 10,debited",
+            overflow: TextOverflow.clip,
+            textAlign: TextAlign.left,
+            style: TextStyle(
+                fontSize: 14,
+                fontWeight: FontWeight.w400,
+                color: Color.fromRGBO(189, 189, 189, 1)),
+          ),
+          Text(
+            "\$719.94",
+            overflow: TextOverflow.clip,
+            textAlign: TextAlign.left,
+            style: TextStyle(
+                fontSize: 14,
+                fontWeight: FontWeight.w400,
+                color: Color.fromRGBO(189, 189, 189, 1)),
+          ),
+          SizedBox(
+            height: 11,
+          ),
+          MainButton(
+            text: "UNSUBSCRIBE",
+            callBack: () {},
+            isOutlined: false,
+          ),
+          SizedBox(
+            height: 12,
+          ),
+          MainButton(
+            text: "CHANGE PLAN",
+            callBack: () {
+              Navigator.of(context).pushNamed(Routes.paymentPlanScreen);
+            },
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _paymentMethod() {
+    return Padding(
+      padding: EdgeInsets.only(top: 29),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          PaymnetMethodWidget(
+              title: "Master Card",
+              cardNumber: "**1234",
+              asset: "assets/images/mCard.png")
+        ],
       ),
     );
   }
@@ -320,7 +500,7 @@ class _NotificationsState extends State<Notifications> {
         mainAxisSize: MainAxisSize.min,
         children: [
           Text(
-            "Notidications",
+            "Notifications",
             style: TextStyle(
                 color: Gray2, fontSize: 16, fontWeight: FontWeight.w700),
             textAlign: TextAlign.left,
@@ -388,10 +568,10 @@ class _NotificationsState extends State<Notifications> {
                     color: Colors.black),
               ),
               CustomSwitch(
-                value: _enabledPushNotes,
+                value: _enabledSMSNotes,
                 onChanged: (bool val) {
                   setState(() {
-                    _enabledPushNotes = val;
+                    _enabledSMSNotes = val;
                   });
                 },
               ),
