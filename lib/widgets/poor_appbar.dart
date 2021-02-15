@@ -6,8 +6,10 @@ import 'package:flutter_svg/flutter_svg.dart';
 class PoorAppBar extends StatelessWidget with PreferredSizeWidget {
   final String title;
   final BuildContext context;
+  final Function onBackButtonPressed;
 
-  PoorAppBar({@required this.title, @required this.context});
+  PoorAppBar(
+      {@required this.title, @required this.context, this.onBackButtonPressed});
 
   @override
   Widget build(BuildContext context) {
@@ -33,7 +35,9 @@ class PoorAppBar extends StatelessWidget with PreferredSizeWidget {
           Positioned(
               child: GestureDetector(
                   onTap: () {
-                    Navigator.of(context).pop();
+                    onBackButtonPressed == null
+                        ? Navigator.of(context).pop()
+                        : onBackButtonPressed();
                   },
                   child: Icon(
                     Icons.arrow_back,

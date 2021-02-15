@@ -1,8 +1,10 @@
+import 'package:checkincheckout/pages/monitoring_screen.dart';
 import 'package:flutter/material.dart';
 
 import '../widgets/bottom_bar.dart';
 
 import './profile_screen.dart';
+import './cameras_screen.dart';
 
 class MainScreensRoot extends StatefulWidget {
   static final routeName = "MainScreenRoot";
@@ -23,6 +25,8 @@ class _MainScreensRootState extends State<MainScreensRoot> {
 
   List<Widget> _screens = [
     ProfileScreen(),
+    MonitoringScreen(),
+    CamerasScreen(),
   ];
 
   @override
