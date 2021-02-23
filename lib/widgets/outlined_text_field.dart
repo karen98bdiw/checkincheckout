@@ -1,7 +1,10 @@
+import 'dart:ui';
+
 import 'package:flutter/material.dart';
 import '../constants/theme.dart';
 
 class OutlinedTextField extends StatelessWidget {
+  final Key key;
   final String title;
   final String hintText;
   final String errorText;
@@ -18,9 +21,12 @@ class OutlinedTextField extends StatelessWidget {
   final bool borderEnabled;
   final Color titleColor;
   final bool obscureText;
+  final Icon prefixIcon, suffixIcon;
+  final Function onTap;
+  final Widget suffix;
 
   OutlinedTextField({
-    Key key,
+    this.key,
     this.title,
     this.hintText,
     this.errorText,
@@ -37,6 +43,10 @@ class OutlinedTextField extends StatelessWidget {
     this.borderEnabled,
     this.titleColor,
     this.obscureText,
+    this.prefixIcon,
+    this.suffixIcon,
+    this.onTap,
+    this.suffix,
   }) : super(key: key);
   @override
   Widget build(BuildContext context) {
@@ -53,21 +63,8 @@ class OutlinedTextField extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.stretch,
         mainAxisSize: MainAxisSize.min,
         children: [
-          title != null
-              ? Text(
-                  title,
-                  textAlign: TextAlign.center,
-                  style: TextStyle(
-                    fontSize: 14,
-                    fontWeight: FontWeight.w400,
-                    color: titleColor != null ? titleColor : Gray1,
-                  ),
-                )
-              : Container(),
-          SizedBox(
-            height: 7,
-          ),
           TextFormField(
+            onTap: onTap,
             obscureText: obscureText == null ? false : true,
             onFieldSubmitted: onSubmitted,
             textInputAction: action,
@@ -82,14 +79,15 @@ class OutlinedTextField extends StatelessWidget {
             },
             focusNode: focusNode,
             controller: controller,
-            textAlign: TextAlign.center,
+            textAlign: TextAlign.left,
             decoration: InputDecoration(
+              suffix: suffix,
+              isDense: true,
+              prefix: prefixIcon,
+              suffixIcon: suffixIcon,
               filled: filled,
               fillColor: fillColor,
-              contentPadding: EdgeInsets.only(
-                top: 13,
-                bottom: 14,
-              ),
+              contentPadding: EdgeInsets.symmetric(vertical: 12, horizontal: 5),
               hintText: hintText != null ? hintText : title,
               hintStyle: TextStyle(
                 color: Gray5,
@@ -102,7 +100,7 @@ class OutlinedTextField extends StatelessWidget {
                     : borderEnabled
                         ? BorderSide(color: InputBorderColor, width: 1)
                         : BorderSide.none,
-                borderRadius: BorderRadius.circular(18),
+                borderRadius: BorderRadius.circular(8),
               ),
             ),
             validator: (value) {

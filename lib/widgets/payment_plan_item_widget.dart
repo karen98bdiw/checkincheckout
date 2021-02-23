@@ -21,7 +21,7 @@ class PaymentPlanItemWidget extends StatelessWidget {
   });
 
   void _onItemSelect() {
-    Navigator.of(_buildContext).pushNamed(Routes.signInScreen);
+    Navigator.of(_buildContext).pushNamed(Routes.mainScreensRoot);
   }
 
   @override

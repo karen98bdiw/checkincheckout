@@ -1,122 +1,85 @@
-import 'package:checkincheckout/constants/theme.dart';
-import 'package:checkincheckout/widgets/mainButton.dart';
+import 'package:checkincheckout/pages/add_employee_screen.dart';
+import 'package:checkincheckout/pages/edit_empolee_screen.dart';
+import 'package:checkincheckout/pages/view_employee_profile_screen.dart';
 import 'package:flutter/material.dart';
 
-import '../widgets/poor_appbar.dart';
+import '../constants/theme.dart';
+import '../widgets/mainButton.dart';
 
-class PayrollScreen extends StatefulWidget {
-  static final routeName = "PayrollScreen";
+class StaffBaseView extends StatelessWidget {
   @override
-  _PayrollScreenState createState() => _PayrollScreenState();
-}
-
-class _PayrollScreenState extends State<PayrollScreen> {
-  void showShareAlertBar() {
-    showDialog(
-        context: context,
-        builder: (ctx) => AlertDialog(
-              elevation: 0,
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(10),
-              ),
-              contentPadding: EdgeInsets.symmetric(
-                horizontal: MediaQuery.of(context).size.width * 0.07,
-                vertical: 24,
-              ),
-              content: Column(
-                crossAxisAlignment: CrossAxisAlignment.stretch,
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  InkWell(
-                    onTap: () {
-                      Navigator.of(context).pop("1");
-                    },
-                    child: Text(
-                      "SHARE GENERAL REPORT",
-                      textAlign: TextAlign.left,
-                      style: TextStyle(
-                          fontWeight: FontWeight.w500,
-                          fontSize: 18,
-                          color: Gray1),
-                    ),
-                  ),
-                  SizedBox(
-                    height: 25,
-                  ),
-                  InkWell(
-                    onTap: () {
-                      Navigator.of(context).pop("2");
-                    },
-                    child: Text(
-                      "SHARE PERSONAL REPORT",
-                      textAlign: TextAlign.left,
-                      style: TextStyle(
-                          fontWeight: FontWeight.w500,
-                          fontSize: 18,
-                          color: Gray1),
-                    ),
-                  ),
-                ],
-              ),
-            )).then(
-      (value) => print(value),
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: EdgeInsets.only(top: 46, bottom: 10),
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        children: [
+          _searchBar(context: context),
+          Padding(
+            padding: EdgeInsets.only(left: 22, right: 27),
+            child: PaginatidList(
+              itemsCount: 250,
+              height: MediaQuery.of(context).size.height * 0.47,
+              dividerStep: 25,
+            ),
+          ),
+          SizedBox(
+            height: 20,
+          ),
+          Padding(
+            padding: EdgeInsets.only(left: 22, right: 27),
+            child: MainButton(
+              text: "ADD EMPLOYEE",
+              callBack: () {
+                Navigator.pushNamed(context, AddEmployeeScreen.routeName);
+              },
+            ),
+          ),
+          SizedBox(
+            height: 10,
+          )
+        ],
+      ),
     );
   }
 
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-        appBar: PoorAppBar(
-          title: "Payroll",
-          context: context,
-        ),
-        body: SingleChildScrollView(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              SizedBox(
-                height: 17,
-              ),
-              PaginatidList(
-                itemsCount: 250,
-                dividerStep: 25,
-                height: MediaQuery.of(context).size.height * 0.60,
-              ),
-              Padding(
-                padding: EdgeInsets.only(
-                  top: 21,
-                  left:
-                      MediaQuery.of(context).size.width * defaultPaddingProcent,
-                  right:
-                      MediaQuery.of(context).size.width * defaultPaddingProcent,
-                ),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.stretch,
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    MainButton(
-                        text: "PRINT",
-                        callBack: () {
-                          Navigator.of(context).pop();
-                        }),
-                    SizedBox(
-                      height: 12,
-                    ),
-                    MainButton(
-                        text: "SHARE",
-                        callBack: () {
-                          showShareAlertBar();
-                        }),
-                    SizedBox(
-                      height: 12,
-                    ),
-                  ],
-                ),
-              )
-            ],
+  Widget _searchBar({@required BuildContext context}) {
+    return Padding(
+      padding: EdgeInsets.symmetric(
+          horizontal:
+              MediaQuery.of(context).size.width * defaultPaddingProcent),
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        children: [
+          Text(
+            "Search",
+            textAlign: TextAlign.center,
+            style: TextStyle(
+              fontWeight: FontWeight.w400,
+              fontSize: 18,
+              color: Gray1,
+            ),
           ),
-        ));
+          SizedBox(
+            height: 4,
+          ),
+          TextField(
+            decoration: InputDecoration(
+              border: OutlineInputBorder(
+                borderSide: BorderSide(color: InputBorderColor, width: 1),
+                borderRadius: BorderRadius.circular(18),
+              ),
+              suffixIcon: Icon(
+                Icons.search,
+                color: Gray2,
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
   }
 }
 
@@ -124,7 +87,7 @@ class PaginatidList extends StatefulWidget {
   final int itemsCount;
   final int dividerStep;
   final double height;
-  final List<PayrollItem> items;
+  final List<EmployeItem> items;
 
   PaginatidList(
       {@required this.itemsCount, this.dividerStep, this.height, this.items});
@@ -134,9 +97,71 @@ class PaginatidList extends StatefulWidget {
 }
 
 class _PaginatidListState extends State<PaginatidList> {
-  List<PayrollItem> allItemsList = [];
+  void openEmployeProfile() {
+    Navigator.of(context)
+        .push(MaterialPageRoute(builder: (c) => ViewEmployeProfileScreen()));
+  } //function will got empoyee
 
-  List<PayrollItem> inShowList = [];
+  void showEmployeDiolog() {
+    showDialog(
+        context: context,
+        builder: (ctx) {
+          return AlertDialog(
+            backgroundColor: Gray6,
+            elevation: 0,
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(10),
+            ),
+            contentPadding: EdgeInsets.symmetric(
+              horizontal: MediaQuery.of(context).size.width * 0.07,
+              vertical: 24,
+            ),
+            content: Column(
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                InkWell(
+                  onTap: () {
+                    Navigator.of(ctx).pop(EditEmpoleeScreen.routeName);
+                  },
+                  child: Text(
+                    "Edit Employee",
+                    textAlign: TextAlign.left,
+                    style: TextStyle(
+                        fontWeight: FontWeight.w500,
+                        fontSize: 18,
+                        color: Gray1),
+                  ),
+                ),
+                SizedBox(
+                  height: 25,
+                ),
+                InkWell(
+                  onTap: () {
+                    Navigator.of(ctx).pop("removeEmployeeScreen");
+                  },
+                  child: Text(
+                    "Remove Employee",
+                    textAlign: TextAlign.left,
+                    style: TextStyle(
+                        fontWeight: FontWeight.w500,
+                        fontSize: 18,
+                        color: Gray1),
+                  ),
+                ),
+              ],
+            ),
+          );
+        }).then((value) {
+      if (value == EditEmpoleeScreen.routeName) {
+        Navigator.pushNamed(context, EditEmpoleeScreen.routeName);
+      }
+    });
+  }
+
+  List<EmployeItem> allItemsList = [];
+
+  List<EmployeItem> inShowList = [];
   var index = 0;
   var enableNumbersCount;
   List<int> enableNumbersList = [];
@@ -174,7 +199,10 @@ class _PaginatidListState extends State<PaginatidList> {
     }
     for (var _i = 0; _i <= widget.itemsCount; _i++) {
       allItemsList.add(
-        PayrollItem(employee: "john smith", period: "20/20/20", hours: _i),
+        EmployeItem(
+            name: "John Smith",
+            position: "Manager",
+            asset: "assets/images/eProfPic.png"),
       );
     }
     super.initState();
@@ -221,58 +249,46 @@ class _PaginatidListState extends State<PaginatidList> {
             mainAxisSize: MainAxisSize.min,
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
-              _listTitle(),
               Expanded(
                 child: ListView.builder(
                   itemBuilder: (ctx, i) {
-                    return Column(
-                      crossAxisAlignment: CrossAxisAlignment.stretch,
-                      mainAxisSize: MainAxisSize.min,
-                      children: [
-                        Container(
-                          padding: EdgeInsets.only(
-                            left: 23,
-                            top: 15,
-                            bottom: 19,
-                          ),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceAround,
-                            crossAxisAlignment: CrossAxisAlignment.center,
-                            children: [
-                              Text(
-                                inShowList[i].employee,
-                                textAlign: TextAlign.right,
-                                style: TextStyle(
-                                  color: Color.fromRGBO(74, 74, 74, 1),
-                                  fontSize: 10,
-                                  fontWeight: FontWeight.w400,
-                                ),
-                              ),
-                              Text(
-                                inShowList[i].period,
-                                style: TextStyle(
-                                  color: Color.fromRGBO(74, 74, 74, 1),
-                                  fontSize: 10,
-                                  fontWeight: FontWeight.w400,
-                                ),
-                              ),
-                              Text(
-                                "${inShowList[i].hours}",
-                                style: TextStyle(
-                                  color: Color.fromRGBO(74, 74, 74, 1),
-                                  fontSize: 10,
-                                  fontWeight: FontWeight.w400,
-                                ),
-                              ),
-                            ],
-                          ),
+                    return ListTile(
+                      leading: Container(
+                        height: 50,
+                        width: 50,
+                        decoration: BoxDecoration(
+                            shape: BoxShape.circle,
+                            image: DecorationImage(
+                              image: AssetImage(inShowList[i].asset),
+                            )),
+                      ),
+                      title: Text(
+                        inShowList[i].name,
+                        style: TextStyle(
+                          color: Gray1,
+                          fontSize: 18,
+                          fontWeight: FontWeight.w500,
                         ),
-                        Divider(
-                          height: 2,
-                          thickness: 2,
-                          color: Color.fromRGBO(231, 232, 234, 1),
+                      ),
+                      subtitle: Text(
+                        inShowList[i].position,
+                        style: TextStyle(
+                          color: Gray1,
+                          fontWeight: FontWeight.w400,
+                          fontSize: 14,
                         ),
-                      ],
+                      ),
+                      trailing: IconButton(
+                        icon: Icon(
+                          Icons.more_vert_rounded,
+                          color: mainOrange,
+                          size: 30,
+                        ),
+                        onPressed: () {
+                          showEmployeDiolog();
+                        },
+                      ),
+                      onTap: openEmployeProfile,
                     );
                   },
                   itemCount: inShowList.length,
@@ -286,49 +302,10 @@ class _PaginatidListState extends State<PaginatidList> {
     );
   }
 
-  Widget _listTitle() {
-    return Container(
-      color: mainBlue,
-      padding: EdgeInsets.only(top: 20, left: 11, bottom: 23),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceAround,
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: [
-          Text(
-            "Employee",
-            style: TextStyle(
-              color: Colors.white,
-              fontSize: 10,
-              fontWeight: FontWeight.w700,
-            ),
-          ),
-          Text(
-            "Period",
-            style: TextStyle(
-              color: Colors.white,
-              fontSize: 10,
-              fontWeight: FontWeight.w700,
-            ),
-          ),
-          Text(
-            "Hours",
-            style: TextStyle(
-              color: Colors.white,
-              fontSize: 10,
-              fontWeight: FontWeight.w700,
-            ),
-          ),
-        ],
-      ),
-    );
-  }
-
   Widget _paginations() {
     return Container(
       padding: EdgeInsets.only(
-        left: 23,
         top: 31,
-        right: 16,
       ),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -484,14 +461,14 @@ class PaginationItem extends StatelessWidget {
   }
 }
 
-class PayrollItem {
-  final String employee;
-  final String period;
-  final int hours;
+class EmployeItem {
+  final String name;
+  final String position;
+  final String asset;
 
-  PayrollItem({
-    @required this.employee,
-    @required this.period,
-    @required this.hours,
+  EmployeItem({
+    @required this.name,
+    @required this.position,
+    @required this.asset,
   });
 }

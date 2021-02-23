@@ -73,7 +73,7 @@ class _SignInScreenState extends State<SignInScreen> {
                 minHeight: constraints.maxHeight),
             child: Container(
               padding: EdgeInsets.only(
-                top: 85,
+                top: _bottomInsets > 0 ? 10 : 85,
                 bottom: _bottomInsets > 0 ? _bottomInsets : 41,
                 left: MediaQuery.of(context).size.width * defaultPaddingProcent,
                 right:

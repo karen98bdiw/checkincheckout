@@ -1,4 +1,5 @@
 import 'package:checkincheckout/constants/theme.dart';
+import 'package:checkincheckout/pages/payment_info_screen.dart';
 import 'package:checkincheckout/widgets/mainButton.dart';
 import 'package:checkincheckout/widgets/poor_appbar.dart';
 import 'package:flutter/material.dart';
@@ -133,170 +134,228 @@ class _SignUpScreenState extends State<SignUpScreen> {
     print(value);
   } //fix
 
+  var s = ScrollController();
   @override
   Widget build(BuildContext context) {
+    if (s.hasClients) {
+      print("this is called${s.position.pixels}");
+
+      setState(() {
+        s.jumpTo(s.position.pixels + 70);
+      });
+    }
     buildContext = context;
     return Scaffold(
-      appBar: PoorAppBar(
-        title: "Registration",
-        context: context,
-      ),
-      body: SingleChildScrollView(
-        scrollDirection: Axis.vertical,
-        child: Padding(
-          padding: EdgeInsets.only(
-              top: 2,
-              left: MediaQuery.of(context).size.width * defaultPaddingProcent,
-              right: MediaQuery.of(context).size.width * defaultPaddingProcent,
-              bottom: 31),
-          child: Form(
-            key: _formState,
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.stretch,
-              children: [
-                OutlinedTextField(
-                  title: "First Name",
-                  controller: _firstNameCont,
-                  validator: _firstNameValidator,
-                  onSaved: _saveFormField,
-                  inputType: TextInputType.text,
-                  onSubmitted: (v) {
-                    _middleNameNode.requestFocus();
-                  },
-                  focusNode: _firstNameNode,
-                  action: TextInputAction.next,
-                ),
-                OutlinedTextField(
-                  title: "Middle Name",
-                  controller: _middleNameCont,
-                  validator: _firstNameValidator,
-                  onSaved: _saveFormField,
-                  inputType: TextInputType.text,
-                  focusNode: _middleNameNode,
-                  onSubmitted: (v) {
-                    _lastNameNode.requestFocus();
-                  },
-                ),
-                OutlinedTextField(
-                  title: "Last Name",
-                  controller: _lastNameCont,
-                  validator: _firstNameValidator,
-                  onSaved: _saveFormField,
-                  inputType: TextInputType.text,
-                  focusNode: _lastNameNode,
-                  onSubmitted: (v) {
-                    _companyNameNode.requestFocus();
-                  },
-                  action: TextInputAction.next,
-                ),
-                OutlinedTextField(
-                  title: "Copmany Name",
-                  controller: _companyNameCont,
-                  validator: _firstNameValidator,
-                  onSaved: _saveFormField,
-                  inputType: TextInputType.text,
-                  focusNode: _companyNameNode,
-                  onSubmitted: (v) {
-                    _emailNode.requestFocus();
-                  },
-                  action: TextInputAction.next,
-                ),
-                OutlinedTextField(
-                  title: "Email",
-                  controller: _emailCont,
-                  validator: _firstNameValidator,
-                  onSaved: _saveFormField,
-                  inputType: TextInputType.text,
-                  onChanged: _firstNameValidator,
-                  focusNode: _emailNode,
-                  onSubmitted: (v) {
-                    _phoneNode.requestFocus();
-                  },
-                  action: TextInputAction.next,
-                ),
-                OutlinedTextField(
-                  title: "Phone",
-                  controller: _phoneCont,
-                  validator: _firstNameValidator,
-                  onSaved: _saveFormField,
-                  inputType: TextInputType.text,
-                  focusNode: _phoneNode,
-                  onSubmitted: (v) {
-                    _positionNode.requestFocus();
-                  },
-                  action: TextInputAction.next,
-                ),
-                OutlinedTextField(
-                  title: "Position",
-                  controller: _positionCont,
-                  validator: _firstNameValidator,
-                  onSaved: _saveFormField,
-                  inputType: TextInputType.text,
-                  focusNode: _positionNode,
-                  onSubmitted: (v) {
-                    _streetNode.requestFocus();
-                  },
-                  action: TextInputAction.next,
-                ),
-                OutlinedTextField(
-                  title: "Street",
-                  controller: _streetCont,
-                  validator: _firstNameValidator,
-                  onSaved: _saveFormField,
-                  inputType: TextInputType.text,
-                  focusNode: _streetNode,
-                  onSubmitted: (v) {
-                    _cityNode.requestFocus();
-                  },
-                  action: TextInputAction.next,
-                ),
-                OutlinedTextField(
-                  title: "City",
-                  controller: _cityCont,
-                  validator: _firstNameValidator,
-                  onSaved: _saveFormField,
-                  inputType: TextInputType.text,
-                  focusNode: _cityNode,
-                  onSubmitted: (v) {
-                    _stateNode.requestFocus();
-                  },
-                  action: TextInputAction.next,
-                ),
-                OutlinedTextField(
-                  title: "State",
-                  controller: _stateCont,
-                  validator: _firstNameValidator,
-                  onSaved: _saveFormField,
-                  inputType: TextInputType.text,
-                  focusNode: _stateNode,
-                  onSubmitted: (v) {
-                    _zipNode.requestFocus();
-                  },
-                  action: TextInputAction.next,
-                ),
-                OutlinedTextField(
-                  title: "Zip Code",
-                  controller: _zipCodeCont,
-                  validator: _firstNameValidator,
-                  onSaved: _saveFormField,
-                  inputType: TextInputType.text,
-                  focusNode: _zipNode,
-                  onSubmitted: (v) {
-                    _zipNode.unfocus();
-                  },
-                ),
-                SizedBox(
-                  height: 47,
-                ),
-                MainButton(
-                  text: "NEXT",
-                  callBack: validateForm,
-                ),
-              ],
-            ),
-          ),
+        appBar: PoorAppBar(
+          title: "Registration",
+          context: context,
         ),
-      ),
-    );
+        body: LayoutBuilder(builder: (ct, c) {
+          print("bottom${MediaQuery.of(context).viewInsets.bottom}");
+          return ConstrainedBox(
+              constraints:
+                  BoxConstraints(minWidth: c.maxWidth, minHeight: c.maxHeight),
+              child: SingleChildScrollView(
+                controller: s,
+                child: Padding(
+                  padding: EdgeInsets.only(
+                    top: 2,
+                    left: MediaQuery.of(context).size.width *
+                        defaultPaddingProcent,
+                    right: MediaQuery.of(context).size.width *
+                        defaultPaddingProcent,
+                    bottom: 30,
+                  ),
+                  child: Form(
+                    key: _formState,
+                    child: Column(
+                      children: [
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Expanded(
+                              child: OutlinedTextField(
+                                title: "First Name",
+                                controller: _firstNameCont,
+                                validator: _firstNameValidator,
+                                onSaved: _saveFormField,
+                                inputType: TextInputType.text,
+                                onSubmitted: (v) {
+                                  _middleNameNode.requestFocus();
+                                },
+                                focusNode: _firstNameNode,
+                                action: TextInputAction.next,
+                              ),
+                            ),
+                            SizedBox(
+                              width: 10,
+                            ),
+                            Expanded(
+                              child: OutlinedTextField(
+                                title: "Middle Name",
+                                controller: _middleNameCont,
+                                validator: _firstNameValidator,
+                                onSaved: _saveFormField,
+                                inputType: TextInputType.text,
+                                focusNode: _middleNameNode,
+                                onSubmitted: (v) {
+                                  _lastNameNode.requestFocus();
+                                },
+                              ),
+                            ),
+                          ],
+                        ),
+                        OutlinedTextField(
+                          title: "Last Name",
+                          controller: _lastNameCont,
+                          validator: _firstNameValidator,
+                          onSaved: _saveFormField,
+                          inputType: TextInputType.text,
+                          focusNode: _lastNameNode,
+                          onSubmitted: (v) {
+                            _companyNameNode.requestFocus();
+                          },
+                          action: TextInputAction.next,
+                        ),
+                        OutlinedTextField(
+                          title: "Copmany Name",
+                          controller: _companyNameCont,
+                          validator: _firstNameValidator,
+                          onSaved: _saveFormField,
+                          inputType: TextInputType.text,
+                          focusNode: _companyNameNode,
+                          onSubmitted: (v) {
+                            _emailNode.requestFocus();
+                          },
+                          action: TextInputAction.next,
+                        ),
+                        OutlinedTextField(
+                          title: "Email",
+                          controller: _emailCont,
+                          validator: _firstNameValidator,
+                          onSaved: _saveFormField,
+                          inputType: TextInputType.text,
+                          onChanged: _firstNameValidator,
+                          focusNode: _emailNode,
+                          onSubmitted: (v) {
+                            _phoneNode.requestFocus();
+                          },
+                          action: TextInputAction.next,
+                        ),
+                        OutlinedTextField(
+                          title: "Phone",
+                          controller: _phoneCont,
+                          validator: _firstNameValidator,
+                          onSaved: _saveFormField,
+                          inputType: TextInputType.text,
+                          focusNode: _phoneNode,
+                          onSubmitted: (v) {
+                            _positionNode.requestFocus();
+                          },
+                          action: TextInputAction.next,
+                        ),
+                        OutlinedTextField(
+                          title: "Position",
+                          controller: _positionCont,
+                          validator: _firstNameValidator,
+                          onSaved: _saveFormField,
+                          inputType: TextInputType.text,
+                          focusNode: _positionNode,
+                          onSubmitted: (v) {
+                            _streetNode.requestFocus();
+                          },
+                          action: TextInputAction.next,
+                        ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Flexible(
+                              flex: 1,
+                              child: OutlinedTextField(
+                                title: "State",
+                                controller: _stateCont,
+                                validator: _firstNameValidator,
+                                onSaved: _saveFormField,
+                                inputType: TextInputType.text,
+                                focusNode: _stateNode,
+                                onSubmitted: (v) {
+                                  _zipNode.requestFocus();
+                                },
+                                action: TextInputAction.next,
+                              ),
+                            ),
+                            SizedBox(
+                              width: 10,
+                            ),
+                            Flexible(
+                              flex: 3,
+                              child: OutlinedTextField(
+                                title: "City",
+                                controller: _cityCont,
+                                validator: _firstNameValidator,
+                                onSaved: _saveFormField,
+                                inputType: TextInputType.text,
+                                focusNode: _cityNode,
+                                onSubmitted: (v) {
+                                  _stateNode.requestFocus();
+                                },
+                                action: TextInputAction.next,
+                              ),
+                            ),
+                          ],
+                        ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Flexible(
+                              flex: 3,
+                              child: OutlinedTextField(
+                                title: "Street",
+                                controller: _streetCont,
+                                validator: _firstNameValidator,
+                                onSaved: _saveFormField,
+                                inputType: TextInputType.text,
+                                focusNode: _streetNode,
+                                onSubmitted: (v) {
+                                  _cityNode.requestFocus();
+                                },
+                                action: TextInputAction.next,
+                              ),
+                            ),
+                            SizedBox(
+                              width: 10,
+                            ),
+                            Flexible(
+                              flex: 1,
+                              child: OutlinedTextField(
+                                title: "Zip Code",
+                                controller: _zipCodeCont,
+                                validator: _firstNameValidator,
+                                onSaved: _saveFormField,
+                                inputType: TextInputType.text,
+                                focusNode: _zipNode,
+                                onSubmitted: (v) {
+                                  _zipNode.unfocus();
+                                },
+                              ),
+                            ),
+                          ],
+                        ),
+                        SizedBox(
+                          height: 20,
+                        ),
+                        MainButton(
+                          text: "NEXT",
+                          callBack: () {
+                            Navigator.of(context)
+                                .pushNamed(Routes.paymentInfoScreen);
+                          },
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+              ));
+        }));
   }
 }

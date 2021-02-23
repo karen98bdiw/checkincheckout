@@ -88,7 +88,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 Container(
                   child: GestureDetector(
                     onTap: () {
-                      Navigator.of(context).pop();
+                      Navigator.of(context).pushNamed(Routes.introScreen);
                     },
                     child: Container(
                       width: 40,
@@ -147,67 +147,109 @@ class _ProfileScreenState extends State<ProfileScreen> {
 
   Widget _locations({@required BuildContext context}) {
     return Container(
-      width: MediaQuery.of(context).size.width * 0.63,
       constraints:
-          BoxConstraints(maxHeight: MediaQuery.of(context).size.height * 0.25),
-      padding: EdgeInsets.only(
-        left: 12,
-        top: 4,
-        right: 7.5,
-        bottom: 8,
-      ),
-      decoration: BoxDecoration(
-        color: mainBlue,
-        borderRadius: BorderRadius.circular(10),
-      ),
+          BoxConstraints(minHeight: MediaQuery.of(context).size.height * 0.25),
+      padding: EdgeInsets.symmetric(
+          horizontal: MediaQuery.of(context).size.width * 0.16),
       child: Column(
-        mainAxisSize: MainAxisSize.min,
         crossAxisAlignment: CrossAxisAlignment.stretch,
+        mainAxisSize: MainAxisSize.min,
         children: [
-          InkWell(
-            onTap: _toogleShowLocations,
-            child: Row(
+          Container(
+            constraints: BoxConstraints(
+                maxHeight: MediaQuery.of(context).size.height * 0.25),
+            padding: EdgeInsets.only(
+              left: 12,
+              top: 4,
+              right: 7.5,
+              bottom: 8,
+            ),
+            decoration: BoxDecoration(
+              color: mainBlue,
+              borderRadius: BorderRadius.circular(10),
+            ),
+            child: Column(
               mainAxisSize: MainAxisSize.min,
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              crossAxisAlignment: CrossAxisAlignment.end,
+              crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
-                Text(
-                  "Company Name",
-                  style: TextStyle(
-                    color: Gray6,
-                    fontSize: 24,
-                    fontWeight: FontWeight.w600,
+                InkWell(
+                  onTap: _toogleShowLocations,
+                  child: Row(
+                    mainAxisSize: MainAxisSize.min,
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    crossAxisAlignment: CrossAxisAlignment.end,
+                    children: [
+                      Text(
+                        "Company Name",
+                        style: TextStyle(
+                          color: Gray6,
+                          fontSize: 24,
+                          fontWeight: FontWeight.w600,
+                        ),
+                      ),
+                      SvgPicture.asset(
+                        "assets/icons/dropDown.svg",
+                        width: 14,
+                        height: 9,
+                      ),
+                    ],
                   ),
                 ),
-                SvgPicture.asset(
-                  "assets/icons/dropDown.svg",
-                  width: 14,
-                  height: 9,
-                ),
+                _showLocations
+                    ? Expanded(
+                        child: ListView.builder(
+                          padding: EdgeInsets.all(0),
+                          itemBuilder: (ctx, i) => Column(
+                            mainAxisSize: MainAxisSize.min,
+                            crossAxisAlignment: CrossAxisAlignment.stretch,
+                            children: [
+                              SizedBox(
+                                height: 11,
+                              ),
+                              Text(
+                                "Location $i",
+                                style: TextStyle(
+                                    color: Gray6,
+                                    fontSize: 24,
+                                    fontWeight: FontWeight.w600),
+                              ),
+                            ],
+                          ),
+                          itemCount: 4,
+                        ),
+                      )
+                    : Container(),
               ],
             ),
           ),
-          _showLocations
-              ? Expanded(
-                  child: ListView.builder(
-                    padding: EdgeInsets.all(0),
-                    itemBuilder: (ctx, i) => Column(
-                      mainAxisSize: MainAxisSize.min,
-                      crossAxisAlignment: CrossAxisAlignment.stretch,
-                      children: [
-                        SizedBox(
-                          height: 11,
+          !_showLocations
+              ? Container(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      SizedBox(height: 8),
+                      Text(
+                        "1644 Wilshire Blvd, Unit 300, Los Angeles, CA 90017, United States",
+                        textAlign: TextAlign.center,
+                        style: TextStyle(
+                          color: Gray2,
+                          fontSize: 14,
+                          fontWeight: FontWeight.w500,
                         ),
-                        Text(
-                          "Location $i",
-                          style: TextStyle(
-                              color: Gray6,
-                              fontSize: 24,
-                              fontWeight: FontWeight.w600),
+                      ),
+                      SizedBox(
+                        height: 11,
+                      ),
+                      Text(
+                        "+1 (818) 6797590",
+                        style: TextStyle(
+                          color: Gray2,
+                          fontSize: 18,
+                          fontWeight: FontWeight.w500,
                         ),
-                      ],
-                    ),
-                    itemCount: 3,
+                      ),
+                    ],
                   ),
                 )
               : Container(),

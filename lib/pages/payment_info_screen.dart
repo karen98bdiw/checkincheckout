@@ -45,7 +45,7 @@ class _PaymentInfoScreenState extends State<PaymentInfoScreen> {
   final _formState = GlobalKey<FormState>();
 
   void _validateForm() {
-    _formState.currentState.validate() ? _saveForm() : print("wrong");
+    Navigator.of(context).pushNamed(Routes.paymentPlanScreen);
   }
 
   void _saveForm() {

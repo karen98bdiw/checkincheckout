@@ -14,6 +14,7 @@ class MainButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return FlatButton(
+      minWidth: double.maxFinite,
       padding: EdgeInsets.symmetric(
           vertical: MediaQuery.of(context).size.height * 0.02),
       child: Text(text,

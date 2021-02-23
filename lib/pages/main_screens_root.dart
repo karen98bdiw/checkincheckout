@@ -5,6 +5,7 @@ import '../widgets/bottom_bar.dart';
 
 import './profile_screen.dart';
 import './cameras_screen.dart';
+import './staff_screen.dart';
 
 class MainScreensRoot extends StatefulWidget {
   static final routeName = "MainScreenRoot";
@@ -27,6 +28,7 @@ class _MainScreensRootState extends State<MainScreensRoot> {
     ProfileScreen(),
     MonitoringScreen(),
     CamerasScreen(),
+    StaffScreen(),
   ];
 
   @override

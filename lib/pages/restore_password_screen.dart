@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import '../widgets/logo_widget.dart';
 import '../widgets/mainButton.dart';
 import '../widgets/poor_appbar.dart';
+import '../widgets/outlined_text_field.dart';
 
 class RestorPasswordScreen extends StatefulWidget {
   static final routeName = "RestorePasswordScreen";
@@ -70,7 +71,11 @@ class _RestorPasswordScreenState extends State<RestorPasswordScreen> {
                         _input(),
                       ],
                     ),
-                    MainButton(text: "RESTORE PASSWORD", callBack: () {})
+                    MainButton(
+                        text: "RESTORE PASSWORD",
+                        callBack: () {
+                          Navigator.of(context).pop();
+                        })
                   ],
                 ),
               ),
@@ -80,33 +85,12 @@ class _RestorPasswordScreenState extends State<RestorPasswordScreen> {
   }
 
   Widget _input() {
-    return TextField(
-      enabled: true,
-      maxLines: 1,
-      style: TextStyle(
-          //TODO:;
-          ),
-      keyboardType: TextInputType.emailAddress,
+    return OutlinedTextField(
+      filled: true,
+      fillColor: Colors.white,
+      inputType: TextInputType.emailAddress,
       controller: _emailController,
-      textAlign: TextAlign.center,
-      decoration: InputDecoration(
-        filled: true,
-        fillColor: Colors.white,
-        contentPadding: EdgeInsets.only(
-          top: 13,
-          bottom: 14,
-        ),
-        hintText: "Email",
-        hintStyle: TextStyle(
-          color: Gray4,
-          fontSize: 16,
-          fontWeight: FontWeight.w400,
-        ),
-        border: OutlineInputBorder(
-          borderSide: BorderSide.none,
-          borderRadius: BorderRadius.circular(18),
-        ),
-      ),
+      hintText: "Email",
     );
   }
 }
