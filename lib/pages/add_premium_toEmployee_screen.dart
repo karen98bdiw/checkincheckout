@@ -68,7 +68,7 @@ class _AddEmployeePremiumScreen extends State<AddEmployeePremiumScreen> {
               shape: BoxShape.circle,
               color: Color.fromRGBO(196, 196, 196, 1),
               image: DecorationImage(
-                image: AssetImage("assets/images/profilePic.png"),
+                image: AssetImage("assets/images/eProfPic.png"),
                 fit: BoxFit.fill,
               ),
             ),

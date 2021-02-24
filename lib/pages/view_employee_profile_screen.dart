@@ -1,6 +1,7 @@
 import 'package:checkincheckout/pages/add_employee_screen.dart';
-import 'package:checkincheckout/pages/add_premium_toEmployee._screen.dart';
+import 'package:checkincheckout/pages/add_premium_toEmployee_screen.dart';
 import 'package:checkincheckout/pages/edit_empolee_screen.dart';
+import 'package:checkincheckout/pages/calculate_employee_payroll_screen.dart';
 import 'package:checkincheckout/pages/employee_monitoring_screen.dart';
 import 'package:checkincheckout/router.gr.dart';
 import 'package:flutter/material.dart';
@@ -53,7 +54,8 @@ class _ViewEmployeProfileScreen extends State<ViewEmployeProfileScreen> {
                   MainButton(
                       text: "CALCULATE PAYROLL",
                       callBack: () {
-                        Navigator.of(context).pushNamed(Routes.payrollScreen);
+                        Navigator.of(context).push(MaterialPageRoute(
+                            builder: (c) => EmployeeCalculatePayrollScreen()));
                       }),
                   SizedBox(
                     height: 12,
@@ -254,8 +256,8 @@ class _ViewEmployeProfileScreen extends State<ViewEmployeProfileScreen> {
                 ),
                 GestureDetector(
                   onTap: () {
-                    Navigator.of(context)
-                        .pushNamed(EditEmpoleeScreen.routeName);
+                    Navigator.of(context).push(
+                        MaterialPageRoute(builder: (c) => EditEmpoleeScreen()));
                   },
                   child: Container(
                     width: 40,

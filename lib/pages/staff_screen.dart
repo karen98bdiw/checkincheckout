@@ -7,8 +7,10 @@ import './edit_empolee_screen.dart';
 
 class StaffScreen extends StatelessWidget {
   Widget _view = StaffBaseView();
+  static BuildContext baseScreenContext;
   @override
   Widget build(BuildContext context) {
+    baseScreenContext = context;
     return Scaffold(
       body: Navigator(
         onGenerateRoute: (settings) {

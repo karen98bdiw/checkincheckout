@@ -1,6 +1,8 @@
 import 'package:checkincheckout/pages/add_employee_screen.dart';
 import 'package:checkincheckout/pages/edit_empolee_screen.dart';
+import 'package:checkincheckout/pages/staff_screen.dart';
 import 'package:checkincheckout/pages/view_employee_profile_screen.dart';
+import 'package:checkincheckout/widgets/outlined_text_field.dart';
 import 'package:flutter/material.dart';
 
 import '../constants/theme.dart';
@@ -53,30 +55,10 @@ class StaffBaseView extends StatelessWidget {
         mainAxisSize: MainAxisSize.min,
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
-          Text(
-            "Search",
-            textAlign: TextAlign.center,
-            style: TextStyle(
-              fontWeight: FontWeight.w400,
-              fontSize: 18,
-              color: Gray1,
-            ),
-          ),
-          SizedBox(
-            height: 4,
-          ),
-          TextField(
-            decoration: InputDecoration(
-              border: OutlineInputBorder(
-                borderSide: BorderSide(color: InputBorderColor, width: 1),
-                borderRadius: BorderRadius.circular(18),
-              ),
-              suffixIcon: Icon(
-                Icons.search,
-                color: Gray2,
-              ),
-            ),
-          ),
+          OutlinedTextField(
+            hintText: "Search",
+            suffixIcon: Icon(Icons.search),
+          )
         ],
       ),
     );
@@ -98,7 +80,8 @@ class PaginatidList extends StatefulWidget {
 
 class _PaginatidListState extends State<PaginatidList> {
   void openEmployeProfile() {
-    Navigator.of(context)
+    Navigator.of(StaffScreen
+            .baseScreenContext) //call function with staff screen global context fro going out staff screen
         .push(MaterialPageRoute(builder: (c) => ViewEmployeProfileScreen()))
         .then((value) => print(value));
     //here i will got employee for delete;
@@ -127,7 +110,7 @@ class _PaginatidListState extends State<PaginatidList> {
                     Navigator.of(ctx).pop(EditEmpoleeScreen.routeName);
                   },
                   child: Text(
-                    "Edit Employee",
+                    "EDIT EMPLOYEE",
                     textAlign: TextAlign.left,
                     style: TextStyle(
                         fontWeight: FontWeight.w500,
@@ -143,7 +126,7 @@ class _PaginatidListState extends State<PaginatidList> {
                     Navigator.of(ctx).pop("removeEmployeeScreen");
                   },
                   child: Text(
-                    "Remove Employee",
+                    "REMOVE EMPLOYEE",
                     textAlign: TextAlign.left,
                     style: TextStyle(
                         fontWeight: FontWeight.w500,
@@ -156,7 +139,7 @@ class _PaginatidListState extends State<PaginatidList> {
           );
         }).then((value) {
       if (value == EditEmpoleeScreen.routeName) {
-        Navigator.pushNamed(context, EditEmpoleeScreen.routeName);
+        Navigator.of(context).pushNamed(EditEmpoleeScreen.routeName);
       }
     });
   }
