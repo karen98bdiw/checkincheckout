@@ -1,3 +1,4 @@
+import 'package:checkincheckout/pages/calculate_payroll_screen.dart';
 import 'package:checkincheckout/router.gr.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -46,7 +47,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 MainButton(
                     text: "CALCULATE PAYROLL",
                     callBack: () {
-                      Navigator.of(context).pushNamed(Routes.payrollScreen);
+                      Navigator.of(context).push(MaterialPageRoute(
+                          builder: (c) => CalculatePayrollScreen()));
                     }),
                 SizedBox(
                   height: 12,

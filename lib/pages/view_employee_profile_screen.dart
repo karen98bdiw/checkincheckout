@@ -1,3 +1,7 @@
+import 'package:checkincheckout/pages/add_employee_screen.dart';
+import 'package:checkincheckout/pages/add_premium_toEmployee._screen.dart';
+import 'package:checkincheckout/pages/edit_empolee_screen.dart';
+import 'package:checkincheckout/pages/employee_monitoring_screen.dart';
 import 'package:checkincheckout/router.gr.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -15,52 +19,184 @@ class _ViewEmployeProfileScreen extends State<ViewEmployeProfileScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Column(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          _topView(context: context),
-          SizedBox(
-            height: 11,
-          ),
-          Container(
-            padding: EdgeInsets.symmetric(
-              horizontal: MediaQuery.of(context).size.width *
-                  defaultPaddingProcent, //cant set cross axis to strech
-            ),
-            width: MediaQuery.of(context).size.width,
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.stretch,
-              children: [
-                SizedBox(
-                  height: 13,
-                ),
-                MainButton(
-                    text: "ADD PREMIUM",
-                    callBack: () {
-                      Navigator.of(context).pushNamed(Routes.payrollScreen);
-                    }),
-                SizedBox(
-                  height: 13,
-                ),
-                MainButton(
-                    text: "CALCULATE PAYROLL",
-                    callBack: () {
-                      Navigator.of(context).pushNamed(Routes.payrollScreen);
-                    }),
-                SizedBox(
-                  height: 12,
-                ),
-                MainButton(text: "MONITORING", callBack: () {})
-              ],
-            ),
-          )
-        ],
+      body: SingleChildScrollView(
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            _topView(context: context),
+            Container(
+              padding: EdgeInsets.only(
+                left: MediaQuery.of(context).size.width *
+                    defaultPaddingProcent, //cant set cross axis to strech
+                right: MediaQuery.of(context).size.width *
+                    defaultPaddingProcent, //cant set cross axis to strech
+                top: 15,
+                bottom: 33,
+              ),
+              width: MediaQuery.of(context).size.width,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                children: [
+                  _info(context: context),
+                  SizedBox(
+                    height: 20,
+                  ),
+                  MainButton(
+                      text: "ADD PREMIUM",
+                      callBack: () {
+                        Navigator.of(context).push(MaterialPageRoute(
+                            builder: (c) => AddEmployeePremiumScreen()));
+                      }),
+                  SizedBox(
+                    height: 13,
+                  ),
+                  MainButton(
+                      text: "CALCULATE PAYROLL",
+                      callBack: () {
+                        Navigator.of(context).pushNamed(Routes.payrollScreen);
+                      }),
+                  SizedBox(
+                    height: 12,
+                  ),
+                  MainButton(
+                      text: "MONITORING",
+                      callBack: () {
+                        Navigator.of(context).push(MaterialPageRoute(
+                            builder: (c) => EmployeeMonitoringScreen()));
+                      })
+                ],
+              ),
+            )
+          ],
+        ),
       ),
     );
   }
 
   Widget _info({@required BuildContext context}) {
-    return Container();
+    return Column(
+      mainAxisSize: MainAxisSize.min,
+      crossAxisAlignment: CrossAxisAlignment.center,
+      children: [
+        SizedBox(
+          height: 15,
+        ),
+        Text(
+          "Brian Smith",
+          style: TextStyle(
+            fontSize: 24,
+            fontWeight: FontWeight.w600,
+            color: Gray1,
+          ),
+        ),
+        SizedBox(
+          height: 4,
+        ),
+        Text(
+          "Manager",
+          style: TextStyle(
+            fontWeight: FontWeight.w500,
+            fontSize: 14,
+            color: Gray2,
+          ),
+        ),
+        SizedBox(
+          height: 4,
+        ),
+        Text(
+          "+1(111)-11-111",
+          style: TextStyle(
+            color: Gray2,
+            fontSize: 14,
+            fontWeight: FontWeight.w500,
+          ),
+        ),
+        SizedBox(
+          height: 16,
+        ),
+        RichText(
+          text: TextSpan(
+            children: [
+              TextSpan(
+                text: "Date of employment",
+                style: TextStyle(
+                  color: Gray2,
+                  fontWeight: FontWeight.w700,
+                  fontSize: 14,
+                ),
+              ),
+              TextSpan(
+                text: " 21/21/21",
+                style: TextStyle(color: Gray2, fontWeight: FontWeight.w500),
+              ),
+            ],
+          ),
+        ),
+        SizedBox(
+          height: 10,
+        ),
+        RichText(
+          text: TextSpan(
+            children: [
+              TextSpan(
+                text: "Salary",
+                style: TextStyle(
+                  color: Gray2,
+                  fontWeight: FontWeight.w700,
+                  fontSize: 14,
+                ),
+              ),
+              TextSpan(
+                text: " 800\$ per moth",
+                style: TextStyle(color: Gray2, fontWeight: FontWeight.w500),
+              ),
+            ],
+          ),
+        ),
+        SizedBox(
+          height: 10,
+        ),
+        RichText(
+          text: TextSpan(
+            children: [
+              TextSpan(
+                text: "Start of the work day",
+                style: TextStyle(
+                  color: Gray2,
+                  fontWeight: FontWeight.w700,
+                  fontSize: 14,
+                ),
+              ),
+              TextSpan(
+                text: " 9:00AM",
+                style: TextStyle(color: Gray2, fontWeight: FontWeight.w500),
+              ),
+            ],
+          ),
+        ),
+        SizedBox(
+          height: 10,
+        ),
+        RichText(
+          text: TextSpan(
+            children: [
+              TextSpan(
+                text: "End of the work day",
+                style: TextStyle(
+                  color: Gray2,
+                  fontWeight: FontWeight.w700,
+                  fontSize: 14,
+                ),
+              ),
+              TextSpan(
+                text: " 5:00PM",
+                style: TextStyle(color: Gray2, fontWeight: FontWeight.w500),
+              ),
+            ],
+          ),
+        ),
+      ],
+    );
   }
 
   Widget _topView({@required BuildContext context}) {
@@ -86,7 +222,7 @@ class _ViewEmployeProfileScreen extends State<ViewEmployeProfileScreen> {
                 Container(
                   child: GestureDetector(
                     onTap: () {
-                      Navigator.of(context).pushNamed(Routes.introScreen);
+                      Navigator.of(context).pop("deleteEmployee");
                     },
                     child: Container(
                       width: 40,
@@ -97,7 +233,7 @@ class _ViewEmployeProfileScreen extends State<ViewEmployeProfileScreen> {
                       ),
                       child: Center(
                         child: Icon(
-                          Icons.arrow_back_ios,
+                          Icons.delete,
                           color: Colors.white,
                         ),
                       ),
@@ -118,7 +254,8 @@ class _ViewEmployeProfileScreen extends State<ViewEmployeProfileScreen> {
                 ),
                 GestureDetector(
                   onTap: () {
-                    Navigator.of(context).pushNamed(Routes.editProfileScreen);
+                    Navigator.of(context)
+                        .pushNamed(EditEmpoleeScreen.routeName);
                   },
                   child: Container(
                     width: 40,

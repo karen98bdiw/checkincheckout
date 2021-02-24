@@ -14,10 +14,13 @@ class StaffScreen extends StatelessWidget {
         onGenerateRoute: (settings) {
           print("on generate route called");
           _view = StaffBaseView();
+          print("settings route ${settings.name}");
           if (settings.name == AddEmployeeScreen.routeName) {
+            print("add employee openning");
             _view = AddEmployeeScreen();
           } else {
             if (settings.name == EditEmpoleeScreen.routeName) {
+              print("edit Employe screen openning");
               _view = EditEmpoleeScreen();
             }
           }

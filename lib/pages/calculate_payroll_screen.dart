@@ -1,3 +1,4 @@
+import 'package:checkincheckout/pages/payroll_screen.dart';
 import 'package:flutter/material.dart';
 
 import '../widgets/mainButton.dart';
@@ -43,6 +44,7 @@ class _CalculatePayrollScreenState extends State<CalculatePayrollScreen> {
           children: [
             Text(
               "Select Period",
+              textAlign: TextAlign.center,
               style: TextStyle(
                 color: Gray1,
                 fontSize: 18,
@@ -52,100 +54,24 @@ class _CalculatePayrollScreenState extends State<CalculatePayrollScreen> {
             SizedBox(
               height: 12,
             ),
-            Text(
-              "From, MM/DD/YYYY",
-              textAlign: TextAlign.center,
-              style: TextStyle(
-                fontSize: 14,
-                fontWeight: FontWeight.w400,
-                color: Gray1,
-              ),
+            OutlinedTextField(
+              hintText: "From, MM/DD/YYYY",
             ),
             SizedBox(
               height: 7,
             ),
-            TextField(
-              controller: _fromController,
-              focusNode: _fromFocusNode,
-              textInputAction: TextInputAction.next,
-              enabled: true,
-              maxLines: 1,
-              style: TextStyle(
-                  //TODO:;
-                  ),
-              keyboardType: TextInputType.text,
-              textAlign: TextAlign.center,
-              decoration: InputDecoration(
-                contentPadding: EdgeInsets.only(
-                  top: 13,
-                  bottom: 14,
-                ),
-                hintStyle: TextStyle(
-                  color: Gray5,
-                  fontSize: 16,
-                  fontWeight: FontWeight.w400,
-                ),
-                border: OutlineInputBorder(
-                  borderSide: BorderSide(color: InputBorderColor, width: 1),
-                  borderRadius: BorderRadius.circular(18),
-                ),
-              ),
-              onSubmitted: (v) {
-                _toFocuseNode.requestFocus();
-              },
-            ),
-            SizedBox(
-              height: 9,
+            OutlinedTextField(
+              hintText: "To, MM/DD/YYYY",
             ),
             SizedBox(
               height: 12,
             ),
-            Text(
-              "To, MM/DD/YYYY",
-              textAlign: TextAlign.center,
-              style: TextStyle(
-                fontSize: 14,
-                fontWeight: FontWeight.w400,
-                color: Gray1,
-              ),
-            ),
-            SizedBox(
-              height: 7,
-            ),
-            TextField(
-              controller: _toController,
-              focusNode: _toFocuseNode,
-              textInputAction: TextInputAction.done,
-              enabled: true,
-              maxLines: 1,
-              style: TextStyle(
-                  //TODO:;
-                  ),
-              keyboardType: TextInputType.text,
-              textAlign: TextAlign.center,
-              decoration: InputDecoration(
-                contentPadding: EdgeInsets.only(
-                  top: 13,
-                  bottom: 14,
-                ),
-                hintStyle: TextStyle(
-                  color: Gray5,
-                  fontSize: 16,
-                  fontWeight: FontWeight.w400,
-                ),
-                border: OutlineInputBorder(
-                  borderSide: BorderSide(color: InputBorderColor, width: 1),
-                  borderRadius: BorderRadius.circular(18),
-                ),
-              ),
-              onSubmitted: (v) {
-                _toFocuseNode.unfocus();
-              },
-            ),
-            SizedBox(
-              height: 12,
-            ),
-            MainButton(text: "CALCULATE", callBack: () {})
+            MainButton(
+                text: "CALCULATE",
+                callBack: () {
+                  Navigator.of(context)
+                      .push(MaterialPageRoute(builder: (c) => PayrollScreen()));
+                })
           ],
         ),
       ),

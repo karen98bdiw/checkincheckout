@@ -7,7 +7,7 @@ import '../widgets/outlined_text_field.dart';
 import '../widgets/poor_appbar.dart';
 
 class EditEmpoleeScreen extends StatefulWidget {
-  static final routeName = "AddEmployeeScreen";
+  static final routeName = "EditEmployeeScreen";
   @override
   _EditEmpolyeeScreenState createState() => _EditEmpolyeeScreenState();
 }
@@ -77,6 +77,30 @@ class _EditEmpolyeeScreenState extends State<EditEmpoleeScreen> {
                           child: Center(
                             child: Icon(
                               Icons.add,
+                              size: 20,
+                            ),
+                          ),
+                        ),
+                      ),
+                    ),
+                    Positioned(
+                      right: 3,
+                      bottom: 3,
+                      child: GestureDetector(
+                        onTap: () {
+                          print("adddddd");
+                        },
+                        child: Container(
+                          alignment: Alignment.topRight,
+                          width: 40,
+                          height: 40,
+                          decoration: BoxDecoration(
+                            shape: BoxShape.circle,
+                            color: mainOrange,
+                          ),
+                          child: Center(
+                            child: Icon(
+                              Icons.delete,
                               size: 20,
                             ),
                           ),
