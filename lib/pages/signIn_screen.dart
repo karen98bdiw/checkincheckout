@@ -1,4 +1,5 @@
 import 'package:checkincheckout/constants/theme.dart';
+import 'package:checkincheckout/pages/employee_personal_profile/employe_presonal_profile_screen.dart';
 import 'package:checkincheckout/widgets/logo_widget.dart';
 import 'package:checkincheckout/widgets/mainButton.dart';
 import 'package:checkincheckout/widgets/poor_appbar.dart';

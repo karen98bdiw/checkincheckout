@@ -3,29 +3,31 @@ import 'package:checkincheckout/pages/add_premium_toEmployee_screen.dart';
 import 'package:checkincheckout/pages/edit_empolee_screen.dart';
 import 'package:checkincheckout/pages/calculate_employee_payroll_screen.dart';
 import 'package:checkincheckout/pages/employee_monitoring_screen.dart';
+import 'package:checkincheckout/pages/employee_personal_profile/employee_daily_template_screen.dart';
 import 'package:checkincheckout/router.gr.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:flutter_svg_provider/flutter_svg_provider.dart' as svgProvider;
 
-import '../constants/theme.dart';
-import '../widgets/mainButton.dart';
+import '../../constants/theme.dart';
+import '../../widgets/mainButton.dart';
 
-class ViewEmployeProfileScreen extends StatefulWidget {
+class EmployeePersonalProfileScreen extends StatefulWidget {
   @override
-  _ViewEmployeProfileScreen createState() => _ViewEmployeProfileScreen();
+  _EmployeePersonalProfileScreen createState() =>
+      _EmployeePersonalProfileScreen();
 }
 
-class _ViewEmployeProfileScreen extends State<ViewEmployeProfileScreen> {
+class _EmployeePersonalProfileScreen
+    extends State<EmployeePersonalProfileScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: SingleChildScrollView(
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            _topView(context: context),
-            Container(
+      body: Column(
+        children: [
+          _topView(context: context),
+          Expanded(
+            child: Container(
               padding: EdgeInsets.only(
                 left: MediaQuery.of(context).size.width *
                     defaultPaddingProcent, //cant set cross axis to strech
@@ -37,40 +39,20 @@ class _ViewEmployeProfileScreen extends State<ViewEmployeProfileScreen> {
               width: MediaQuery.of(context).size.width,
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.stretch,
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   _info(context: context),
-                  SizedBox(
-                    height: 20,
-                  ),
                   MainButton(
-                      text: "ADD PREMIUM",
+                      text: "DAILY TEMPLATE",
                       callBack: () {
                         Navigator.of(context).push(MaterialPageRoute(
-                            builder: (c) => AddEmployeePremiumScreen()));
-                      }),
-                  SizedBox(
-                    height: 13,
-                  ),
-                  MainButton(
-                      text: "CALCULATE PAYROLL",
-                      callBack: () {
-                        Navigator.of(context).push(MaterialPageRoute(
-                            builder: (c) => EmployeeCalculatePayrollScreen()));
-                      }),
-                  SizedBox(
-                    height: 12,
-                  ),
-                  MainButton(
-                      text: "MONITORING",
-                      callBack: () {
-                        Navigator.of(context).push(MaterialPageRoute(
-                            builder: (c) => EmployeeMonitoringScreen()));
+                            builder: (c) => EmployeeDailyTemplateScreen()));
                       })
                 ],
               ),
-            )
-          ],
-        ),
+            ),
+          )
+        ],
       ),
     );
   }
@@ -235,7 +217,7 @@ class _ViewEmployeProfileScreen extends State<ViewEmployeProfileScreen> {
                 Container(
                   child: GestureDetector(
                     onTap: () {
-                      Navigator.of(context).pop("deleteEmployee");
+                      Navigator.of(context).pop();
                     },
                     child: Container(
                       width: 40,
@@ -246,7 +228,7 @@ class _ViewEmployeProfileScreen extends State<ViewEmployeProfileScreen> {
                       ),
                       child: Center(
                         child: Icon(
-                          Icons.delete,
+                          Icons.arrow_back,
                           color: Colors.white,
                         ),
                       ),
@@ -279,26 +261,13 @@ class _ViewEmployeProfileScreen extends State<ViewEmployeProfileScreen> {
                     ),
                     child: Center(
                       child: Icon(
-                        Icons.edit,
+                        Icons.settings,
                         color: Colors.white,
                       ),
                     ),
                   ),
                 ),
               ],
-            ),
-          ),
-          Positioned(
-            top: 15,
-            child: IconButton(
-              icon: Icon(
-                Icons.arrow_back,
-                color: mainOrange,
-                size: 50,
-              ),
-              onPressed: () {
-                Navigator.of(context).pop();
-              },
             ),
           ),
         ],
