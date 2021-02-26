@@ -4,6 +4,7 @@ import 'package:checkincheckout/pages/edit_empolee_screen.dart';
 import 'package:checkincheckout/pages/calculate_employee_payroll_screen.dart';
 import 'package:checkincheckout/pages/employee_monitoring_screen.dart';
 import 'package:checkincheckout/pages/employee_personal_profile/employee_daily_template_screen.dart';
+import 'package:checkincheckout/pages/employee_personal_profile/employee_settings_screen.dart';
 import 'package:checkincheckout/router.gr.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -113,7 +114,7 @@ class _EmployeePersonalProfileScreen
           text: TextSpan(
             children: [
               TextSpan(
-                text: "Date of employment",
+                text: "Date of employment:",
                 style: TextStyle(
                   color: Gray2,
                   fontWeight: FontWeight.w700,
@@ -134,7 +135,7 @@ class _EmployeePersonalProfileScreen
           text: TextSpan(
             children: [
               TextSpan(
-                text: "Salary",
+                text: "Salary:",
                 style: TextStyle(
                   color: Gray2,
                   fontWeight: FontWeight.w700,
@@ -155,7 +156,7 @@ class _EmployeePersonalProfileScreen
           text: TextSpan(
             children: [
               TextSpan(
-                text: "Start of the work day",
+                text: "Start of the work day:",
                 style: TextStyle(
                   color: Gray2,
                   fontWeight: FontWeight.w700,
@@ -176,7 +177,7 @@ class _EmployeePersonalProfileScreen
           text: TextSpan(
             children: [
               TextSpan(
-                text: "End of the work day",
+                text: "End of the work day:",
                 style: TextStyle(
                   color: Gray2,
                   fontWeight: FontWeight.w700,
@@ -249,8 +250,8 @@ class _EmployeePersonalProfileScreen
                 ),
                 GestureDetector(
                   onTap: () {
-                    Navigator.of(context).push(
-                        MaterialPageRoute(builder: (c) => EditEmpoleeScreen()));
+                    Navigator.of(context).push(MaterialPageRoute(
+                        builder: (c) => EmployeeSettingsScreen()));
                   },
                   child: Container(
                     width: 40,

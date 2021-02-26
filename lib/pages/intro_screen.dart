@@ -1,5 +1,6 @@
 import 'package:checkincheckout/constants/theme.dart';
 import 'package:checkincheckout/pages/employee_personal_profile/employe_presonal_profile_screen.dart';
+import 'package:checkincheckout/pages/parking/parking_screens_root.dart';
 import 'package:checkincheckout/widgets/logo_widget.dart';
 import 'package:checkincheckout/widgets/mainButton.dart';
 import 'package:flutter/material.dart';
@@ -59,6 +60,14 @@ class IntroScreen extends StatelessWidget {
                 callBack: () {
                   Navigator.of(context).push(MaterialPageRoute(
                       builder: (c) => EmployeePersonalProfileScreen()));
+                },
+              ),
+              SizedBox(height: 18),
+              MainButton(
+                text: "ParkingScreensRoot",
+                callBack: () {
+                  Navigator.of(context).push(
+                      MaterialPageRoute(builder: (c) => ParkingScreensRoot()));
                 },
               ),
             ],

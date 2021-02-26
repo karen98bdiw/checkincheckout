@@ -1,15 +1,66 @@
 import 'package:checkincheckout/router.gr.dart';
 import 'package:flutter/material.dart';
 
-import '../widgets/poor_appbar.dart';
-import '../constants/theme.dart';
-import '../widgets/outlined_text_field.dart';
-import '../widgets/custom_switch.dart';
-import '../widgets/payment_method_widget.dart';
-import '../widgets/mainButton.dart';
+import '../../widgets/poor_appbar.dart';
+import '../../constants/theme.dart';
+import '../../widgets/outlined_text_field.dart';
+import '../../widgets/custom_switch.dart';
+import '../../widgets/payment_method_widget.dart';
+import '../../widgets/mainButton.dart';
 
-class EditProfileScreen extends StatelessWidget {
+class EditParkingProfileScreen extends StatelessWidget {
   static final routeName = "EditProfileScreen";
+
+  Widget _parkingCost() {
+    return Padding(
+      padding: EdgeInsets.symmetric(vertical: 61),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          RichText(
+            text: TextSpan(
+              children: [
+                TextSpan(
+                    text: "Parking Cost,",
+                    style: TextStyle(
+                      fontWeight: FontWeight.w700,
+                      fontSize: 16,
+                      color: Gray2,
+                    )),
+                TextSpan(
+                    text: "\$ per hour",
+                    style: TextStyle(
+                      fontWeight: FontWeight.w700,
+                      fontSize: 16,
+                      color: Gray2,
+                    ))
+              ],
+            ),
+          ),
+          Container(
+            width: 74,
+            height: 46,
+            padding: EdgeInsets.symmetric(horizontal: 27, vertical: 15),
+            child: Text(
+              "60",
+              style: TextStyle(
+                color: Gray2,
+                fontSize: 14,
+                fontWeight: FontWeight.w400,
+              ),
+            ),
+            decoration: BoxDecoration(
+              border: Border.all(
+                width: 1,
+                color: Color.fromRGBO(112, 112, 112, 1),
+              ),
+              borderRadius: BorderRadius.circular(18),
+            ),
+          )
+        ],
+      ),
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -33,7 +84,7 @@ class EditProfileScreen extends StatelessWidget {
               _header(context: context),
               _form(),
               Notifications(),
-              _breaks(),
+              _parkingCost(),
               _subscriptions(context: context),
               _paymentMethod(),
               SizedBox(
@@ -154,168 +205,8 @@ class EditProfileScreen extends StatelessWidget {
     );
   }
 
-  Widget _breaks() {
-    return Padding(
-      padding: EdgeInsets.only(top: 50.5),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.stretch,
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              RichText(
-                text: TextSpan(
-                  children: [
-                    TextSpan(
-                      text: "Dinner time,",
-                      style: TextStyle(
-                        fontSize: 16,
-                        fontWeight: FontWeight.w700,
-                        color: Gray2,
-                      ),
-                    ),
-                    TextSpan(
-                      text: " " + "minutes \n per day",
-                      style: TextStyle(
-                        fontSize: 14,
-                        fontWeight: FontWeight.w400,
-                        color: Color.fromRGBO(189, 189, 189, 1),
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-              Container(
-                width: 74,
-                height: 46,
-                padding: EdgeInsets.symmetric(horizontal: 27, vertical: 15),
-                child: Text(
-                  "60",
-                  style: TextStyle(
-                    color: Gray2,
-                    fontSize: 14,
-                    fontWeight: FontWeight.w400,
-                  ),
-                ),
-                decoration: BoxDecoration(
-                  border: Border.all(
-                    width: 1,
-                    color: Color.fromRGBO(112, 112, 112, 1),
-                  ),
-                  borderRadius: BorderRadius.circular(18),
-                ),
-              )
-            ],
-          ),
-          SizedBox(
-            height: 21,
-          ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              RichText(
-                text: TextSpan(
-                  children: [
-                    TextSpan(
-                      text: "Personal breaks,",
-                      style: TextStyle(
-                        fontSize: 16,
-                        fontWeight: FontWeight.w700,
-                        color: Gray2,
-                      ),
-                    ),
-                    TextSpan(
-                      text: " " + "minutes \n per day",
-                      style: TextStyle(
-                        fontSize: 14,
-                        fontWeight: FontWeight.w400,
-                        color: Color.fromRGBO(189, 189, 189, 1),
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-              Container(
-                width: 74,
-                height: 46,
-                padding: EdgeInsets.symmetric(horizontal: 27, vertical: 15),
-                child: Text(
-                  "30",
-                  style: TextStyle(
-                    color: Gray2,
-                    fontSize: 14,
-                    fontWeight: FontWeight.w400,
-                  ),
-                ),
-                decoration: BoxDecoration(
-                  border: Border.all(
-                    width: 1,
-                    color: Color.fromRGBO(112, 112, 112, 1),
-                  ),
-                  borderRadius: BorderRadius.circular(18),
-                ),
-              )
-            ],
-          ),
-          SizedBox(
-            height: 21,
-          ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              RichText(
-                text: TextSpan(
-                  children: [
-                    TextSpan(
-                      text: "Absence Penalty,",
-                      style: TextStyle(
-                        fontSize: 16,
-                        fontWeight: FontWeight.w700,
-                        color: Gray2,
-                      ),
-                    ),
-                    TextSpan(
-                      text: " " + "minutes \n per day",
-                      style: TextStyle(
-                        fontSize: 14,
-                        fontWeight: FontWeight.w400,
-                        color: Color.fromRGBO(189, 189, 189, 1),
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-              Container(
-                width: 74,
-                height: 46,
-                padding: EdgeInsets.symmetric(horizontal: 27, vertical: 15),
-                child: Text(
-                  "10",
-                  style: TextStyle(
-                    color: Gray2,
-                    fontSize: 14,
-                    fontWeight: FontWeight.w400,
-                  ),
-                ),
-                decoration: BoxDecoration(
-                  border: Border.all(
-                    width: 1,
-                    color: Color.fromRGBO(112, 112, 112, 1),
-                  ),
-                  borderRadius: BorderRadius.circular(18),
-                ),
-              )
-            ],
-          )
-        ],
-      ),
-    );
-  }
-
   Widget _subscriptions({@required BuildContext context}) {
-    return Padding(
-      padding: EdgeInsets.only(top: 89),
+    return Container(
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         mainAxisSize: MainAxisSize.min,

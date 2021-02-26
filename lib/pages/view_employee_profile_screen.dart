@@ -131,7 +131,7 @@ class _ViewEmployeProfileScreen extends State<ViewEmployeProfileScreen> {
           text: TextSpan(
             children: [
               TextSpan(
-                text: "Date of employment",
+                text: "Date of employment:",
                 style: TextStyle(
                   color: Gray2,
                   fontWeight: FontWeight.w700,
@@ -152,7 +152,7 @@ class _ViewEmployeProfileScreen extends State<ViewEmployeProfileScreen> {
           text: TextSpan(
             children: [
               TextSpan(
-                text: "Salary",
+                text: "Salary:",
                 style: TextStyle(
                   color: Gray2,
                   fontWeight: FontWeight.w700,
@@ -173,7 +173,7 @@ class _ViewEmployeProfileScreen extends State<ViewEmployeProfileScreen> {
           text: TextSpan(
             children: [
               TextSpan(
-                text: "Start of the work day",
+                text: "Start of the work day:",
                 style: TextStyle(
                   color: Gray2,
                   fontWeight: FontWeight.w700,
@@ -194,7 +194,7 @@ class _ViewEmployeProfileScreen extends State<ViewEmployeProfileScreen> {
           text: TextSpan(
             children: [
               TextSpan(
-                text: "End of the work day",
+                text: "End of the work day:",
                 style: TextStyle(
                   color: Gray2,
                   fontWeight: FontWeight.w700,
