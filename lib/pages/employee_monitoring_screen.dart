@@ -91,7 +91,7 @@ class _PaginatidListState extends State<PaginatidList> {
     }
     for (var _i = 0; _i <= widget.itemsCount; _i++) {
       allItemsList.add(
-        PayrollItem(employee: "john smith", period: "20/20/20", hours: _i),
+        PayrollItem(event: "check in", employee: "john smith", hours: _i),
       );
     }
     super.initState();
@@ -157,7 +157,7 @@ class _PaginatidListState extends State<PaginatidList> {
                             crossAxisAlignment: CrossAxisAlignment.center,
                             children: [
                               Text(
-                                inShowList[i].employee,
+                                inShowList[i].event,
                                 textAlign: TextAlign.right,
                                 style: TextStyle(
                                   color: Color.fromRGBO(74, 74, 74, 1),
@@ -166,7 +166,7 @@ class _PaginatidListState extends State<PaginatidList> {
                                 ),
                               ),
                               Text(
-                                inShowList[i].period,
+                                inShowList[i].employee,
                                 style: TextStyle(
                                   color: Color.fromRGBO(74, 74, 74, 1),
                                   fontSize: 10,
@@ -212,7 +212,7 @@ class _PaginatidListState extends State<PaginatidList> {
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           Text(
-            "Employee",
+            "Event",
             style: TextStyle(
               color: Colors.white,
               fontSize: 10,
@@ -220,7 +220,7 @@ class _PaginatidListState extends State<PaginatidList> {
             ),
           ),
           Text(
-            "Period",
+            "Employee",
             style: TextStyle(
               color: Colors.white,
               fontSize: 10,
@@ -403,12 +403,12 @@ class PaginationItem extends StatelessWidget {
 
 class PayrollItem {
   final String employee;
-  final String period;
+  final String event;
   final int hours;
 
   PayrollItem({
     @required this.employee,
-    @required this.period,
+    @required this.event,
     @required this.hours,
   });
 }

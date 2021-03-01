@@ -1,8 +1,439 @@
+import 'package:checkincheckout/constants/theme.dart';
 import 'package:flutter/material.dart';
 
-class ParkingMonitoringScreen extends StatelessWidget {
+class ParkingMonitoringScreen extends StatefulWidget {
+  static final routeName = "MonitoringScreen";
+  @override
+  _ParkingMonitoringScreen createState() => _ParkingMonitoringScreen();
+}
+
+class _ParkingMonitoringScreen extends State<ParkingMonitoringScreen> {
   @override
   Widget build(BuildContext context) {
-    return Container();
+    return Scaffold(
+        body: SafeArea(
+      child: SingleChildScrollView(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            PaginatidList(
+              itemsCount: 250,
+              dividerStep: 25,
+              height: MediaQuery.of(context).size.height * 0.60,
+            ),
+          ],
+        ),
+      ),
+    ));
   }
+}
+
+class PaginatidList extends StatefulWidget {
+  final int itemsCount;
+  final int dividerStep;
+  final double height;
+  final List<PayrollItem> items;
+
+  PaginatidList(
+      {@required this.itemsCount, this.dividerStep, this.height, this.items});
+
+  @override
+  _PaginatidListState createState() => _PaginatidListState();
+}
+
+class _PaginatidListState extends State<PaginatidList> {
+  List<PayrollItem> allItemsList = [];
+
+  List<PayrollItem> inShowList = [];
+  var index = 0;
+  var enableNumbersCount;
+  List<int> enableNumbersList = [];
+  List<int> inShowNumbersList = [];
+
+  void next() {
+    setState(() {
+      if (index > enableNumbersList.length - 2) {
+        return;
+      }
+      index++;
+    });
+  }
+
+  void scrollEnd() {
+    setState(() {
+      index = enableNumbersCount - 1;
+    });
+  }
+
+  void prev() {
+    setState(() {
+      if (index < 1) {
+        return;
+      }
+      index--;
+    });
+  }
+
+  @override
+  void initState() {
+    if (widget.items != null) {
+      allItemsList = widget.items;
+      return;
+    }
+    for (var _i = 0; _i <= widget.itemsCount; _i++) {
+      allItemsList.add(
+        PayrollItem(event: "check in", plate: "05LS055", date: _i),
+      );
+    }
+    super.initState();
+  }
+
+  void scrollStart() {
+    setState(() {
+      index = 0;
+    });
+  }
+
+  void fillEnabledList() {
+    enableNumbersCount = (widget.itemsCount / widget.dividerStep).ceil();
+    enableNumbersList = [];
+    for (var _i = 1; _i <= enableNumbersCount; _i++) {
+      enableNumbersList.add(_i);
+    }
+    if (index * widget.dividerStep + widget.dividerStep >=
+        allItemsList.length) {
+      inShowList =
+          allItemsList.sublist(index * widget.dividerStep, allItemsList.length);
+    } else {
+      inShowList = allItemsList.sublist(index * widget.dividerStep,
+          index * widget.dividerStep + widget.dividerStep);
+    }
+  }
+
+  void setIndex({int newIndex}) {
+    setState(() {
+      index = newIndex;
+    });
+  }
+
+  void _chooseDate() {
+    showDateRangePicker(
+      context: context,
+      firstDate: DateTime.now().subtract(
+        Duration(days: 15),
+      ),
+      lastDate: DateTime.now().add(
+        Duration(days: 15),
+      ),
+    );
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    fillEnabledList();
+    return Column(
+      mainAxisSize: MainAxisSize.min,
+      crossAxisAlignment: CrossAxisAlignment.stretch,
+      children: [
+        Container(
+          height: widget.height,
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: [
+              _listTitle(),
+              Expanded(
+                child: ListView.builder(
+                  itemBuilder: (ctx, i) {
+                    return Column(
+                      crossAxisAlignment: CrossAxisAlignment.stretch,
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        Container(
+                          padding: EdgeInsets.only(
+                            top: 15,
+                            bottom: 19,
+                          ),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceAround,
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            children: [
+                              Text(
+                                inShowList[i].event,
+                                textAlign: TextAlign.right,
+                                style: TextStyle(
+                                  color: Color.fromRGBO(74, 74, 74, 1),
+                                  fontSize: 10,
+                                  fontWeight: FontWeight.w400,
+                                ),
+                              ),
+                              Text(
+                                inShowList[i].plate,
+                                style: TextStyle(
+                                  color: Color.fromRGBO(74, 74, 74, 1),
+                                  fontSize: 10,
+                                  fontWeight: FontWeight.w400,
+                                ),
+                              ),
+                              Text(
+                                "${inShowList[i].date}",
+                                style: TextStyle(
+                                  color: Color.fromRGBO(74, 74, 74, 1),
+                                  fontSize: 10,
+                                  fontWeight: FontWeight.w400,
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                        Divider(
+                          height: 2,
+                          thickness: 2,
+                          color: Color.fromRGBO(231, 232, 234, 1),
+                        ),
+                      ],
+                    );
+                  },
+                  itemCount: inShowList.length,
+                ),
+              ),
+            ],
+          ),
+        ),
+        _paginations(),
+      ],
+    );
+  }
+
+  Widget _listTitle() {
+    return Container(
+      color: mainBlue,
+      padding: EdgeInsets.only(top: 20, left: 11, bottom: 23),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceAround,
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          Text(
+            "Event",
+            style: TextStyle(
+              color: Colors.white,
+              fontSize: 10,
+              fontWeight: FontWeight.w700,
+            ),
+          ),
+          Text(
+            "Car License Plate",
+            style: TextStyle(
+              color: Colors.white,
+              fontSize: 10,
+              fontWeight: FontWeight.w700,
+            ),
+          ),
+          GestureDetector(
+            onTap: () => _chooseDate(),
+            child: RichText(
+              text: TextSpan(
+                children: [
+                  TextSpan(
+                    text: "Date",
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 10,
+                      fontWeight: FontWeight.w700,
+                    ),
+                  ),
+                  WidgetSpan(
+                    child: Icon(
+                      Icons.keyboard_arrow_up_rounded,
+                      color: Colors.white,
+                      size: 10,
+                    ),
+                  ),
+                  WidgetSpan(
+                    child: Icon(
+                      Icons.calendar_today,
+                      color: mainOrange,
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _paginations() {
+    return Container(
+      padding: EdgeInsets.only(
+        left: 23,
+        top: 31,
+        right: 16,
+      ),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        crossAxisAlignment: CrossAxisAlignment.end,
+        children: [
+          Row(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              GestureDetector(
+                  child: Container(
+                    padding: EdgeInsets.all(1),
+                    decoration: BoxDecoration(
+                      color: mainOrange,
+                      borderRadius: BorderRadius.circular(5),
+                    ),
+                    child: Icon(
+                      Icons.arrow_back,
+                      color: Colors.white,
+                    ),
+                  ),
+                  onTap: () {
+                    scrollStart();
+                  }),
+              SizedBox(
+                width: 9,
+              ),
+              GestureDetector(
+                  child: Container(
+                    padding: EdgeInsets.all(1),
+                    decoration: BoxDecoration(
+                      color: mainOrange,
+                      borderRadius: BorderRadius.circular(5),
+                    ),
+                    child: Icon(
+                      Icons.arrow_back_ios_rounded,
+                      color: Colors.white,
+                    ),
+                  ),
+                  onTap: () {
+                    prev();
+                  }),
+            ],
+          ),
+          Expanded(
+            child: Container(
+              padding: EdgeInsets.only(
+                left: 5,
+                right: 17,
+              ),
+              height: 30,
+              child: ListView.builder(
+                padding: EdgeInsets.all(0),
+                scrollDirection: Axis.horizontal,
+                itemBuilder: (ctx, i) {
+                  return PaginationItem(
+                      curentIndex: index,
+                      itemIndex: enableNumbersList[i],
+                      callback: setIndex);
+                },
+                itemCount: enableNumbersList.length,
+              ),
+            ),
+          ),
+          Row(
+            crossAxisAlignment: CrossAxisAlignment.end,
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              GestureDetector(
+                  child: Container(
+                    padding: EdgeInsets.all(1),
+                    decoration: BoxDecoration(
+                      color: mainOrange,
+                      borderRadius: BorderRadius.circular(5),
+                    ),
+                    child: Icon(
+                      Icons.arrow_forward,
+                      color: Colors.white,
+                    ),
+                  ),
+                  onTap: () {
+                    next();
+                  }),
+              SizedBox(
+                width: 9,
+              ),
+              GestureDetector(
+                  child: Container(
+                    padding: EdgeInsets.all(1),
+                    decoration: BoxDecoration(
+                      color: mainOrange,
+                      borderRadius: BorderRadius.circular(5),
+                    ),
+                    child: Icon(
+                      Icons.arrow_forward_ios_rounded,
+                      color: Colors.white,
+                    ),
+                  ),
+                  onTap: () {
+                    scrollEnd();
+                  }),
+              SizedBox(
+                width: 13,
+              ),
+              Text(
+                "${inShowList.length} of ${widget.itemsCount}",
+                style: TextStyle(
+                  color: Color.fromRGBO(74, 74, 74, 1),
+                  fontSize: 11,
+                  fontWeight: FontWeight.w400,
+                ),
+              ),
+            ],
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class PaginationItem extends StatelessWidget {
+  final curentIndex;
+  final itemIndex;
+  final Function callback;
+
+  PaginationItem(
+      {@required this.curentIndex,
+      @required this.itemIndex,
+      @required this.callback});
+
+  @override
+  Widget build(BuildContext context) {
+    return InkWell(
+      onTap: () {
+        callback(newIndex: itemIndex - 1);
+      },
+      child: Padding(
+        padding: EdgeInsets.only(left: 17, bottom: 0),
+        child: Container(
+          alignment: Alignment.bottomCenter,
+          child: Text(
+            "$itemIndex",
+            style: TextStyle(
+              color: itemIndex == curentIndex + 1
+                  ? mainOrange
+                  : Color.fromRGBO(74, 74, 74, 1),
+              fontSize: 11,
+              fontWeight: FontWeight.w400,
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+class PayrollItem {
+  final String event;
+  final String plate;
+  final int date;
+
+  PayrollItem({
+    @required this.plate,
+    @required this.event,
+    @required this.date,
+  });
 }
